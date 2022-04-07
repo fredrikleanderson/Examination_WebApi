@@ -1,6 +1,6 @@
 @import "../../styles.scss";
 
-$item-width: 150px;
+$item-width: 230px;
 
 .item-container{
     @include flex-container($item-width, auto);
@@ -22,7 +22,8 @@ $item-width: 150px;
         }
 
         p{
-            font-size: 0.7em;
+            font-size: 0.6em;
+            margin: auto 5px;
         }
     }
 

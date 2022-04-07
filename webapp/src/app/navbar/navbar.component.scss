@@ -5,7 +5,7 @@ nav{
     @include flex-container(100%, 10vh);
 
     ul{
-        @include flex-container(40%, 10vh);
+        @include flex-container(50%, 10vh);
         justify-content: space-around;
         align-items: flex-end;
     }
