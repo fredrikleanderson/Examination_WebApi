@@ -1,0 +1,21 @@
+@import "../../styles.scss";
+
+nav{
+    @include gradient($prim-color, $sec-color);
+    @include flex-container(100%, 10vh);
+
+    ul{
+        @include flex-container(40%, 10vh);
+        justify-content: space-around;
+        align-items: flex-end;
+    }
+
+    li{
+        @include link;
+        margin-bottom: 5px;
+    }
+
+    li:hover{
+        @include link-hover;
+    }
+}

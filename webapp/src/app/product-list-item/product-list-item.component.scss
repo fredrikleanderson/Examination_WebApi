@@ -1,0 +1,38 @@
+@import "../../styles.scss";
+
+$item-width: 150px;
+
+.item-container{
+    @include flex-container($item-width, auto);
+    flex-direction: column;
+    min-width: $item-width / 2;
+    margin: 10px;
+    background-color: lightgray;
+    border: 1px solid #a9a9a9;
+    border-radius: 5px;
+
+    .container-element{
+        @include flex-container($item-width, auto);
+        margin: 2px auto;
+        justify-content: center;
+
+        img{
+            max-height: 100px;
+            max-width: 100px;
+        }
+
+        p{
+            font-size: 0.7em;
+        }
+    }
+
+
+}
+
+button{
+    @include button(green, 1em);
+}
+
+button:hover{
+    @include button-hover;
+}

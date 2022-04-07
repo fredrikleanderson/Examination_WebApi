@@ -1,0 +1,22 @@
+<div ngClass="item-container">
+    <div ngClass="container-element">
+        <img src="{{imgUrl}}" alt="Servett">
+    </div>
+    <div ngClass="container-element">
+        <h5>{{product?.name}}</h5>
+    </div>
+    <div ngClass="container-element">
+        <p>Beskrivning: {{product?.description}}.</p>
+    </div>
+    <div ngClass="container-element">
+        <p>Pris: {{product?.price}} kronor.</p>
+    </div>
+    <div ngClass="container-element">
+        <p>Kategori: {{product?.category}}.</p>
+    </div>
+    <div ngClass="container-element">
+        <button (click)="AddToBasket()">Lägg till</button>
+    </div>
+</div>
+
+

@@ -1,13 +1,14 @@
 @import "../src/stylesheets/layout.scss";
 @import "../src/stylesheets/colors.scss";
+@import "../src/stylesheets/text.scss";
 
 *{
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif
 }
 
-nav{
-    @include gradient($prim-color, $sec-color);
-    @include flex-container(100%, 10vh);
+ul{
+    list-style: none;
 }

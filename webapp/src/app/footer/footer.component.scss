@@ -1,0 +1,12 @@
+@import "../../stylesheets/layout.scss";
+@import "../../stylesheets/colors.scss";
+@import "../../stylesheets/text.scss";
+
+footer{
+    @include flex-container(100%, 10vh);
+    align-items: center;
+    @include link;
+    @include gradient($prim-color, $sec-color);
+    position:absolute;
+    bottom: 0;
+}
