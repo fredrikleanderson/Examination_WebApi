@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Website\**" />
+    <Content Remove="Website\**" />
+    <EmbeddedResource Remove="Website\**" />
+    <None Remove="Website\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="microsoft.entityframeworkcore.sqlserver" Version="6.0.3" />
     <PackageReference Include="microsoft.entityframeworkcore.tools" Version="6.0.3">
       <PrivateAssets>all</PrivateAssets>
@@ -18,7 +25,6 @@
 
   <ItemGroup>
     <Folder Include="Models\Users\" />
-    <Folder Include="Website\" />
   </ItemGroup>
 
 </Project>
