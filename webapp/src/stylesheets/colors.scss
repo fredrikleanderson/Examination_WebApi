@@ -1,0 +1,6 @@
+$prim-color: DeepSkyBlue;
+$sec-color: DodgerBlue;
+
+@mixin gradient($colorOne, $colorTwo){
+    background-image: linear-gradient(to right, $colorOne, $colorTwo);
+}
