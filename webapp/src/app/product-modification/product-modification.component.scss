@@ -1,0 +1,13 @@
+@import "../../styles.scss";
+
+.form-container{
+    @include form-container(30px);
+}
+
+form{
+    @include form(400px, $form-background, $form-border);
+}
+
+.form-item{
+    @include form-item(300px);
+}

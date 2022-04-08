@@ -1,3 +1,13 @@
-<ul ngClass="list-container" *ngFor="let product of products">
-    <li ngClass="list-item"><app-product-list-item [product]="product"></app-product-list-item></li>
-</ul>
+<div ngClass="container">
+    <label for="categories">Filtrera på kategori</label>
+    <select name="categories" id="categories" [(ngModel)]="selectedCategory" (change)="filterCategories()">
+        <option value="" selected >Alla kategorier</option>
+        <option *ngFor="let category of categories" [value]="category.name">{{category.name}}</option>
+    </select>
+</div>
+<div>
+    <ul ngClass="list-container" *ngFor="let product of products">
+        <h4 *ngIf="!products">Laddar...</h4>
+        <li ngClass="list-item"><app-product-list-item [product]="product"></app-product-list-item></li>
+    </ul>
+</div>

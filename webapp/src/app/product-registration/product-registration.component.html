@@ -1,0 +1,32 @@
+<div ngClass="form-container">
+    <h3>Registrera ny produkt</h3>
+    <form (submit)="CreateProduct()">
+        <div ngClass="form-item">
+            <label for="name">Name</label>
+            <input type="text" name="name" [(ngModel)]="model.name">
+        </div>
+        <div ngClass="form-item">
+            <label for="description">Description</label>
+            <input type="text" name="description" [(ngModel)]="model.description">
+        </div>
+        <div ngClass="form-item">
+            <label for="price">Price</label>
+            <input type="text" name="price" [(ngModel)]="model.price">
+        </div>
+        <div ngClass="form-item">
+            <label for="categoryName">Category</label>
+            <input type="text" name="categoryName" [(ngModel)]="model.categoryName">
+        </div>
+        <div>
+            <input type="submit" value="Skapa produkt">
+        </div>
+    </form>
+    <ul *ngIf="product">
+        <h6>Ny produkt registrerad:</h6>
+        <li>{{product.id}}</li>
+        <li>{{product.name}}</li>
+        <li>{{product.description}}</li>
+        <li>{{product.price}}</li>
+        <li>{{product.category}}</li>
+    </ul>
+</div>

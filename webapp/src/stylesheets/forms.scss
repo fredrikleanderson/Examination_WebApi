@@ -1,0 +1,24 @@
+@mixin form-container($margin-top) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: $margin-top;
+}
+
+@mixin form($width, $backgroundcol, $bordercol){
+    width: $width;
+    margin: 5px;
+    padding: 5px;
+    background-color: $backgroundcol;
+    border: solid 1px $bordercol;
+    border-radius: 5px;
+}
+
+@mixin form-item($width)
+{
+    width: $width;
+    margin: 2px;
+    display: flex;
+    justify-content: space-between;
+    flex-flow: row nowrap;
+}

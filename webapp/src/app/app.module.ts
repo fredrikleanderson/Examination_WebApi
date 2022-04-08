@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -8,6 +8,9 @@ import { FooterComponent } from './footer/footer.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductListItemComponent } from './product-list-item/product-list-item.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ProductAdministrationComponent } from './product-administration/product-administration.component';
+import { ProductRegistrationComponent } from './product-registration/product-registration.component';
+import { ProductModificationComponent } from './product-modification/product-modification.component';
 
 @NgModule({
   declarations: [
@@ -15,12 +18,16 @@ import { HttpClientModule } from '@angular/common/http';
     NavbarComponent,
     FooterComponent,
     ProductListComponent,
-    ProductListItemComponent
+    ProductListItemComponent,
+    ProductAdministrationComponent,
+    ProductRegistrationComponent,
+    ProductModificationComponent
   ],
   imports: [
     HttpClientModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,3 +1,11 @@
+@import "../../styles.scss";
+
+.container{
+    @include flex-container(100%, auto);
+    justify-content: start;
+    margin: auto 10px;
+}
+
 .list-container{
     display: inline-flex;
     flex-flow: row wrap;

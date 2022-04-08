@@ -1,5 +1,7 @@
 $prim-color: DarkRed;
 $sec-color: FireBrick;
+$form-background: bisque;
+$form-border: darkgray;
 
 @mixin gradient($colorOne, $colorTwo){
     background-image: linear-gradient(to right, $colorOne, $colorTwo);

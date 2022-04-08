@@ -1,0 +1,31 @@
+<div ngClass="form-container">
+    <h3>Uppdatera produkt</h3>
+    <form (submit)="UpdateProduct()">
+        <div ngClass="form-item">
+            <label for="products">Välj produkt</label>
+            <select name="products" id="products">
+                <option value="" selected disabled>Välj produkt</option>
+                <option *ngFor="let product of products" [value]="product.id">{{product.name}}</option>
+            </select>
+        </div>
+        <div ngClass="form-item">
+            <label for="name">Name</label>
+            <input type="text" name="name" id="updateName" [(ngModel)]="model.name">
+        </div>
+        <div ngClass="form-item">
+            <label for="description">Description</label>
+            <input type="text" name="description" id="updateDescription" [(ngModel)]="model.description">
+        </div>
+        <div ngClass="form-item">
+            <label for="price">Price</label>
+            <input type="text" name="price" id="updatePrice" [(ngModel)]="model.price">
+        </div>
+        <div ngClass="form-item">
+            <label for="categoryName">Category</label>
+            <input type="text" name="categoryName" id="updateCategoryName" [(ngModel)]="model.categoryName">
+        </div>
+        <div>
+            <input type="submit" value="Uppdatera produkt">
+        </div>
+    </form>
+</div>
