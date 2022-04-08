@@ -11,6 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductAdministrationComponent } from './product-administration/product-administration.component';
 import { ProductRegistrationComponent } from './product-registration/product-registration.component';
 import { ProductModificationComponent } from './product-modification/product-modification.component';
+import { ProductDeletionComponent } from './product-deletion/product-deletion.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ProductModificationComponent } from './product-modification/product-mod
     ProductListItemComponent,
     ProductAdministrationComponent,
     ProductRegistrationComponent,
-    ProductModificationComponent
+    ProductModificationComponent,
+    ProductDeletionComponent
   ],
   imports: [
     HttpClientModule,

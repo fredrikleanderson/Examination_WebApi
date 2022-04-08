@@ -3,7 +3,7 @@
     <form (submit)="UpdateProduct()">
         <div ngClass="form-item">
             <label for="products">Välj produkt</label>
-            <select name="products" id="products" [(ngModel)]="selectedProductId" (change)="SelectProduct()">
+            <select name="products" id="products" ngClass="form-select" [(ngModel)]="selectedProductId" (change)="SelectProduct()">
                 <option value="" selected disabled>Välj produkt</option>
                 <option *ngFor="let product of products" [value]="product.id">{{product.name}}</option>
             </select>

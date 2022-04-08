@@ -1,0 +1,15 @@
+<div ngClass="form-container">
+    <h3>Radera produkt</h3>
+    <form (submit)="DeleteProduct()">
+        <div ngClass="form-item">
+            <label for="products">Välj produkt</label>
+            <select name="products" id="products" ngClass="form-select" [(ngModel)]="selectedProductId">
+                <option value="" selected disabled>Välj produkt</option>
+                <option *ngFor="let product of products" [value]="product.id">{{product.name}}</option>
+            </select>
+        </div>
+        <div ngClass="form-btns">
+            <button type="submit">Radera produkt</button>
+        </div>
+    </form>
+</div>

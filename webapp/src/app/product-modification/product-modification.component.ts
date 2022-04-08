@@ -28,7 +28,6 @@ export class ProductModificationComponent implements OnInit {
   UpdateProduct(): void{
     if(this.model.name!= "" && this.model.description != "" && this.model.price != 0 && this.model.categoryName != "" && this.selectedProductId != null){
       this.productService.updateProduct(this.selectedProductId, this.model).subscribe(response => {
-        console.log(response)
       })
     }
   }

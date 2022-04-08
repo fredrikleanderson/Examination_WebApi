@@ -21,3 +21,44 @@
     justify-content: space-between;
     flex-flow: row nowrap;
 }
+
+.container{
+    @include flex-container(100%, auto);
+}
+
+.form-container{
+    @include form-container(30px);
+}
+
+form{
+    @include form(320px, $form-background, $form-border);
+}
+
+.form-item{
+    @include form-item(300px);
+}
+
+.form-btns{
+    @include form-item(300px);
+    justify-content: space-between;
+}
+
+.form-select{
+    width: 178px;
+}
+
+textarea{
+    resize: none;
+}
+
+input[type=text]{
+    width: 178px;
+}
+
+button{
+    @include button(green, 0.9em);
+}
+
+button:hover{
+    @include button-hover;
+}
