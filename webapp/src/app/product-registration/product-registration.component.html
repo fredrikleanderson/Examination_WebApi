@@ -2,31 +2,24 @@
     <h3>Registrera ny produkt</h3>
     <form (submit)="CreateProduct()">
         <div ngClass="form-item">
-            <label for="name">Name</label>
+            <label for="name">Namn</label>
             <input type="text" name="name" [(ngModel)]="model.name">
         </div>
         <div ngClass="form-item">
-            <label for="description">Description</label>
-            <input type="text" name="description" [(ngModel)]="model.description">
+            <label for="description">Beskrivning</label>
+            <textarea name="description" [(ngModel)]="model.description" rows="4" cols="20"></textarea>
         </div>
         <div ngClass="form-item">
-            <label for="price">Price</label>
+            <label for="price">Pris</label>
             <input type="text" name="price" [(ngModel)]="model.price">
         </div>
         <div ngClass="form-item">
-            <label for="categoryName">Category</label>
+            <label for="categoryName">Kategori</label>
             <input type="text" name="categoryName" [(ngModel)]="model.categoryName">
         </div>
         <div>
-            <input type="submit" value="Skapa produkt">
+            <button type="submit">Skapa produkt</button>
         </div>
     </form>
-    <ul *ngIf="product">
-        <h6>Ny produkt registrerad:</h6>
-        <li>{{product.id}}</li>
-        <li>{{product.name}}</li>
-        <li>{{product.description}}</li>
-        <li>{{product.price}}</li>
-        <li>{{product.category}}</li>
-    </ul>
+    <p *ngIf="product">Ny produkt registrerad med artikelnummer: {{product.id}.</p>
 </div>

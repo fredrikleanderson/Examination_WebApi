@@ -1,0 +1,6 @@
+@import "../../styles.scss";
+
+
+.container{
+    @include flex-container(100%, auto);
+}

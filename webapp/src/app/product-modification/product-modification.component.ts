@@ -11,14 +11,30 @@ import { ProductService } from 'src/services/product.service';
 export class ProductModificationComponent implements OnInit {
 
   model: UpdateProduct;
+  selectedProductId?: number;
   products?: Product[];
 
-  UpdateProduct():void {
-    
+  SelectProduct():void {
+    this.products?.forEach(x => {
+      if(x.id == this.selectedProductId){
+        this.model.name = x.name
+        this.model.description = x.description
+        this.model.price = x.price
+        this.model.categoryName = x.category
+      }
+    })
+  }
+
+  UpdateProduct(): void{
+    if(this.model.name!= "" && this.model.description != "" && this.model.price != 0 && this.model.categoryName != "" && this.selectedProductId != null){
+      this.productService.updateProduct(this.selectedProductId, this.model).subscribe(response => {
+        console.log(response)
+      })
+    }
   }
 
   constructor(private productService: ProductService) {
-    this.model = new UpdateProduct();
+    this.model = new UpdateProduct("", "", 0, "");
    }
 
   ngOnInit(): void {

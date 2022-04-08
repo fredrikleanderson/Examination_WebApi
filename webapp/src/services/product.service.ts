@@ -4,6 +4,7 @@ import { CreateProduct } from 'src/models/create-product';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { UpdateProduct } from 'src/models/update-product';
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +27,9 @@ export class ProductService {
 
   createProduct(product: CreateProduct): Observable<Product>{
     return this.http.post<Product>(this.apiUrl, product, this.httpOptions)
+  }
+
+  updateProduct(id: Number, product: UpdateProduct): Observable<UpdateProduct>{
+    return this.http.put(this.apiUrl + `/${id}`, product, this.httpOptions);
   }
 }

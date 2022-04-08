@@ -3,29 +3,29 @@
     <form (submit)="UpdateProduct()">
         <div ngClass="form-item">
             <label for="products">Välj produkt</label>
-            <select name="products" id="products">
+            <select name="products" id="products" [(ngModel)]="selectedProductId" (change)="SelectProduct()">
                 <option value="" selected disabled>Välj produkt</option>
                 <option *ngFor="let product of products" [value]="product.id">{{product.name}}</option>
             </select>
         </div>
         <div ngClass="form-item">
-            <label for="name">Name</label>
+            <label for="name">Namn</label>
             <input type="text" name="name" id="updateName" [(ngModel)]="model.name">
         </div>
         <div ngClass="form-item">
-            <label for="description">Description</label>
-            <input type="text" name="description" id="updateDescription" [(ngModel)]="model.description">
+            <label for="description">Beskrivning</label>
+            <textarea name="description" [(ngModel)]="model.description" rows="4" cols="20"></textarea>
         </div>
         <div ngClass="form-item">
-            <label for="price">Price</label>
+            <label for="price">Pris</label>
             <input type="text" name="price" id="updatePrice" [(ngModel)]="model.price">
         </div>
         <div ngClass="form-item">
-            <label for="categoryName">Category</label>
+            <label for="categoryName">Kategori</label>
             <input type="text" name="categoryName" id="updateCategoryName" [(ngModel)]="model.categoryName">
         </div>
-        <div>
-            <input type="submit" value="Uppdatera produkt">
+        <div ngClass="form-btns">
+            <button type="submit">Uppdatera produkt</button>
         </div>
     </form>
 </div>
