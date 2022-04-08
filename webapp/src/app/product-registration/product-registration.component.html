@@ -1,6 +1,6 @@
 <div ngClass="form-container">
     <h3>Registrera ny produkt</h3>
-    <form (submit)="CreateProduct()">
+    <form autocomplete="off" (submit)="CreateProduct()">
         <div ngClass="form-item">
             <label for="name">Namn</label>
             <input type="text" name="name" [(ngModel)]="model.name">
@@ -15,11 +15,14 @@
         </div>
         <div ngClass="form-item">
             <label for="categoryName">Kategori</label>
-            <input type="text" name="categoryName" [(ngModel)]="model.categoryName">
+            <input type="text" name="categoryName" list="categorylist" [(ngModel)]="model.categoryName">
+            <datalist id="categorylist">
+                <option *ngFor="let category of categories" [value]="category.name"></option>
+            </datalist>
         </div>
         <div>
             <button type="submit">Skapa produkt</button>
         </div>
     </form>
-    <p *ngIf="product">Ny produkt registrerad med artikelnummer: {{product.id}.</p>
+    <p *ngIf="product">Ok! Artikelnr: {{product.id}}.</p>
 </div>

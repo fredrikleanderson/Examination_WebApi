@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { CreateProduct } from 'src/models/create-product';
 import { Product } from 'src/entities/product';
 import { ProductService } from 'src/services/product.service';
+import { Category } from 'src/entities/category';
+import { CategoryService } from 'src/services/category.service';
 
 @Component({
   selector: 'app-product-registration',
@@ -10,6 +12,7 @@ import { ProductService } from 'src/services/product.service';
 })
 export class ProductRegistrationComponent implements OnInit {
 
+  categories?: Category[];
   model: CreateProduct;
   product?: Product;
 
@@ -19,11 +22,14 @@ export class ProductRegistrationComponent implements OnInit {
     })
   }
 
-  constructor(private productService:ProductService) {
+  constructor(private productService:ProductService, private categoryService:CategoryService) {
     this.model = new CreateProduct();
    }
 
   ngOnInit(): void {
+    this.categoryService.getCategories().subscribe(response => {
+      this.categories = response;
+    })
   }
 
 }
