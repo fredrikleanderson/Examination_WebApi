@@ -39,13 +39,9 @@ namespace Examination_WebApi.Services.InventoryService
             await _context.SaveChangesAsync();
         }
 
-        public Task<int> GetProductQuantityAsync(int productId)
-        {
-            throw new NotImplementedException();
-        }
-
         public Task<ActionResult> UpdateProductInventoryAsync(int productId)
         {
+            //Använd eventuellt senare när ordrar är ordnat
             throw new NotImplementedException();
         }
     }
