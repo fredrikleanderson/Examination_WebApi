@@ -3,4 +3,5 @@ export class CreateProduct {
     description?: string;
     price?: number;
     categoryName?: string;
+    quantity?: number;
 }

@@ -1,6 +1,6 @@
 <div ngClass="form-container">
     <h3>Uppdatera produkt</h3>
-    <form (submit)="UpdateProduct()">
+    <form autocomplete="off" (submit)="UpdateProduct()">
         <div ngClass="form-item">
             <label for="products">Välj produkt</label>
             <select name="products" id="products" ngClass="form-select" [(ngModel)]="selectedProductId" (change)="SelectProduct()">
@@ -10,7 +10,7 @@
         </div>
         <div ngClass="form-item">
             <label for="name">Namn</label>
-            <input type="text" name="name" id="updateName" [(ngModel)]="model.name">
+            <input type="text" name="name" [(ngModel)]="model.name">
         </div>
         <div ngClass="form-item">
             <label for="description">Beskrivning</label>
@@ -18,11 +18,18 @@
         </div>
         <div ngClass="form-item">
             <label for="price">Pris</label>
-            <input type="text" name="price" id="updatePrice" [(ngModel)]="model.price">
+            <input type="number" min="0" name="price" [(ngModel)]="model.price">
+        </div>
+        <div ngClass="form-item">
+            <label for="quantity">Antal</label>
+            <input type="number" min="0" name="quantity" [(ngModel)]="model.quantity">
         </div>
         <div ngClass="form-item">
             <label for="categoryName">Kategori</label>
-            <input type="text" name="categoryName" id="updateCategoryName" [(ngModel)]="model.categoryName">
+            <input type="text" name="categoryName" list="categorylist" [(ngModel)]="model.categoryName">
+            <datalist id="categorylist">
+                <option *ngFor="let category of categories" [value]="category.name"></option>
+            </datalist>
         </div>
         <div ngClass="form-btns">
             <button type="submit">Uppdatera produkt</button>

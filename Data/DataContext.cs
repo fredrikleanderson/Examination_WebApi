@@ -16,6 +16,7 @@ namespace Examination_WebApi.Data
         //public virtual DbSet<AddressEntity> Addresses { get; set; } = null!;
         public virtual DbSet<ProductEntity> Products { get; set; } = null!;
         public virtual DbSet<CategoryEntity> Categories { get; set; } = null!;
+        public virtual DbSet<InventoryEntity> Inventories { get; set; } = null!;
         //public virtual DbSet<OrderEntity> Orders { get; set; } = null!;
         //public virtual DbSet<OrderedProductEntity> OrderedProducts { get; set; } = null!;
 

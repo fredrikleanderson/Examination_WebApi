@@ -24,6 +24,13 @@ namespace Examination_WebApi.Models.Entities
         [ForeignKey("Category")]
         public int CategoryId { get; set; }
 
+        [Required]
+        [ForeignKey("Inventory")]
+        public int InventoryId { get; set; }
+
         public virtual CategoryEntity Category { get; set; } = null!;
+        public virtual InventoryEntity Inventory { get; set;} = null!;
+
+
     }
 }

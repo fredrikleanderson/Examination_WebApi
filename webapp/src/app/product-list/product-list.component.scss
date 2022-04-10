@@ -3,6 +3,7 @@
 .container{
     @include flex-container(100%, auto);
     justify-content: start;
+    flex-wrap: wrap;
     margin: auto 10px;
 }
 

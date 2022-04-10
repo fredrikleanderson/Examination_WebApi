@@ -1,6 +1,7 @@
 using Examination_WebApi.Data;
 using Examination_WebApi.ProductService.Services;
 using Examination_WebApi.Services.CategoryService;
+using Examination_WebApi.Services.InventoryService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,7 @@ builder.Services.AddDbContext<DataContext>();
 
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IInventoryService, InventoryService>();
 
 var app = builder.Build();
 

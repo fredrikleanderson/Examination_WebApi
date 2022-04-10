@@ -11,7 +11,11 @@
         </div>
         <div ngClass="form-item">
             <label for="price">Pris</label>
-            <input type="text" name="price" [(ngModel)]="model.price">
+            <input type="number" min="0" name="price" [(ngModel)]="model.price">
+        </div>
+        <div ngClass="form-item">
+            <label for="quantity">Antal</label>
+            <input type="number" min="0" name="quantity" [(ngModel)]="model.quantity">
         </div>
         <div ngClass="form-item">
             <label for="categoryName">Kategori</label>

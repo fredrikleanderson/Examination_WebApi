@@ -7,6 +7,6 @@ footer{
     align-items: center;
     @include link;
     @include gradient($prim-color, $sec-color);
-    position:absolute;
-    bottom: 0;
+    // position:absolute;
+    // bottom: 0;
 }
