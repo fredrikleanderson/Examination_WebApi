@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Examination_WebApi.Models.Entities
 {
@@ -30,9 +32,33 @@ namespace Examination_WebApi.Models.Entities
         public virtual AddressEntity Address { get; set; } = null!;
 
         [Required]
-        public byte[] PasswordHash { get; private set; }
+        public byte[] Hash { get; private set; } = null!;
 
         [Required]
-        public byte[] Salt { get; private set; }
+        public byte[] Salt { get; private set; } = null!;
+
+        public void CreatePassword(string password)
+        {
+            using var hmac = new HMACSHA512();
+            Salt = hmac.Key;
+            Hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+            hmac.Clear();
+        }
+
+        public bool CompareSecurePassword(string password)
+        {
+            using (var hmac = new HMACSHA512(Salt))
+            {
+                var hash = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
+
+                for (int i = 0; i < hash.Length; i++)
+                {
+                    if (hash[i] != Hash[i])
+                        return false;
+                }
+            }
+
+            return true;
+        }
     }
 }

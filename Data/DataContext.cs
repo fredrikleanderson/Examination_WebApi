@@ -12,8 +12,8 @@ namespace Examination_WebApi.Data
             _configuration = configuration;
         }
 
-        //public virtual DbSet<UserEntity> Users { get; set; } = null!;
-        //public virtual DbSet<AddressEntity> Addresses { get; set; } = null!;
+        public virtual DbSet<UserEntity> Users { get; set; } = null!;
+        public virtual DbSet<AddressEntity> Addresses { get; set; } = null!;
         public virtual DbSet<ProductEntity> Products { get; set; } = null!;
         public virtual DbSet<CategoryEntity> Categories { get; set; } = null!;
         public virtual DbSet<InventoryEntity> Inventories { get; set; } = null!;

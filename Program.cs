@@ -1,7 +1,12 @@
 using Examination_WebApi.Data;
 using Examination_WebApi.ProductService.Services;
+using Examination_WebApi.Services.AddressService;
+using Examination_WebApi.Services.AuthenticationService;
 using Examination_WebApi.Services.CategoryService;
 using Examination_WebApi.Services.InventoryService;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,6 +22,38 @@ builder.Services.AddDbContext<DataContext>();
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IInventoryService, InventoryService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IAddressService, AddressService>();
+
+//builder.Services.AddAuthentication(x =>
+//{
+//    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+//    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+//}).AddJwtBearer(x =>
+//{
+//    x.Events = new JwtBearerEvents
+//    {
+//        OnTokenValidated = context =>
+//        {
+//            if (string.IsNullOrEmpty(context.Principal.Identity.Name))
+//            {
+//                context.Fail("Unauthorized");
+//            }
+
+//            return Task.CompletedTask;
+//        }
+//    };
+
+//    x.RequireHttpsMetadata = true;
+//    x.SaveToken = true;
+//    x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+//    {
+//        ValidateIssuer = false,
+//        ValidateIssuerSigningKey = true,
+//        ValidateAudience = false,
+//        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetValue<string>("SecretKey")))
+//    };
+//});
 
 var app = builder.Build();
 
@@ -28,6 +65,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.UseAuthentication();
 
 app.UseAuthorization();
 

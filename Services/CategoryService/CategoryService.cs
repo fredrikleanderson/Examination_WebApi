@@ -34,8 +34,6 @@ namespace Examination_WebApi.Services.CategoryService
             return category;
         }
 
-
-
         public async Task<ActionResult<IEnumerable<ReadCategoryModel>>> ReadCategoriesAsync()
         {
             List<ReadCategoryModel> result = new();

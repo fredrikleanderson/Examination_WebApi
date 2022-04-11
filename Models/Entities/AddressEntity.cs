@@ -17,7 +17,9 @@ namespace Examination_WebApi.Models.Entities
         public string PostalCode { get; set; } = null!;
 
         [Required]
-        [Column(TypeName = "nvarchar(50")]
+        [Column(TypeName = "nvarchar(50)")]
         public string City { get; set; } = null!;
+
+        public virtual ICollection<UserEntity>? Users { get; set; }
     }
 }
