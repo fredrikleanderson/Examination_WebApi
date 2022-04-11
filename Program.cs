@@ -25,35 +25,35 @@ builder.Services.AddScoped<IInventoryService, InventoryService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAddressService, AddressService>();
 
-//builder.Services.AddAuthentication(x =>
-//{
-//    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-//    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-//}).AddJwtBearer(x =>
-//{
-//    x.Events = new JwtBearerEvents
-//    {
-//        OnTokenValidated = context =>
-//        {
-//            if (string.IsNullOrEmpty(context.Principal.Identity.Name))
-//            {
-//                context.Fail("Unauthorized");
-//            }
+builder.Services.AddAuthentication(x =>
+{
+    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(x =>
+{
+    x.Events = new JwtBearerEvents
+    {
+        OnTokenValidated = context =>
+        {
+            if (context.Principal != null && context.Principal.Identity != null && string.IsNullOrEmpty(context.Principal.Identity.Name))
+            {
+                context.Fail("Unauthorized");
+            }
 
-//            return Task.CompletedTask;
-//        }
-//    };
+            return Task.CompletedTask;
+        }
+    };
 
-//    x.RequireHttpsMetadata = true;
-//    x.SaveToken = true;
-//    x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-//    {
-//        ValidateIssuer = false,
-//        ValidateIssuerSigningKey = true,
-//        ValidateAudience = false,
-//        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetValue<string>("SecretKey")))
-//    };
-//});
+    x.RequireHttpsMetadata = true;
+    x.SaveToken = true;
+    x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+    {
+        ValidateIssuer = false,
+        ValidateIssuerSigningKey = true,
+        ValidateAudience = false,
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetValue<string>("SecretKey")))
+    };
+});
 
 var app = builder.Build();
 

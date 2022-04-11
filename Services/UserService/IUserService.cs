@@ -7,6 +7,6 @@ namespace Examination_WebApi.Services.AuthenticationService
     {
         Task<bool> UserExistsAsync(string username);
         Task<ActionResult<ReadUser>> CreateUserAsync(CreateUser model);
-        Task<ActionResult> VerifyUserAsync(VerifyUser model);
+        Task<ActionResult> VerifyUserAsync(AuthenticateUser model);
     }
 }

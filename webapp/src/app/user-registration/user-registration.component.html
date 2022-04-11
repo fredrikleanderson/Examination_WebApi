@@ -1,0 +1,37 @@
+<div ngClass="form-container">
+    <h3>Registrera ny användare</h3>
+    <form autocomplete="off" (submit)="CreateUser()">
+        <div ngClass="form-item">
+            <label for="firstName">Förnamn</label>
+            <input type="text" name="firstName" [(ngModel)]="model.firstName">
+        </div>
+        <div ngClass="form-item">
+            <label for="lastName">Efternamn</label>
+            <input type="text" name="lastName" [(ngModel)]="model.lastName">
+        </div>
+        <div ngClass="form-item">
+            <label for="email">E-postadress</label>
+            <input type="text" name="email" [(ngModel)]="model.email">
+        </div>
+        <div ngClass="form-item">
+            <label for="password">Lösenord</label>
+            <input type="password" name="password" [(ngModel)]="model.password">
+        </div>
+        <div ngClass="form-item">
+            <label for="streetAdress">Adress</label>
+            <input type="text" name="streetAdress" [(ngModel)]="model.streetAddress">
+        </div>
+        <div ngClass="form-item">
+            <label for="postalCode">Postnummer</label>
+            <input type="text" name="postalCode" [(ngModel)]="model.postalCode">
+        </div>
+        <div ngClass="form-item">
+            <label for="city">Stad</label>
+            <input type="text" name="city" [(ngModel)]="model.city">
+        </div>
+        <div>
+            <button type="submit">Skapa användare</button>
+        </div>
+    </form>
+    <p *ngIf="user">Användare reggad. Id: {{user.id}}</p>
+</div>

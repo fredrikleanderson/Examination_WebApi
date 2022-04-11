@@ -12,6 +12,9 @@ import { ProductAdministrationComponent } from './product-administration/product
 import { ProductRegistrationComponent } from './product-registration/product-registration.component';
 import { ProductModificationComponent } from './product-modification/product-modification.component';
 import { ProductDeletionComponent } from './product-deletion/product-deletion.component';
+import { UserAdministrationComponent } from './user-administration/user-administration.component';
+import { UserRegistrationComponent } from './user-registration/user-registration.component';
+import { UserAuthenticationComponent } from './user-authentication/user-authentication.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,10 @@ import { ProductDeletionComponent } from './product-deletion/product-deletion.co
     ProductAdministrationComponent,
     ProductRegistrationComponent,
     ProductModificationComponent,
-    ProductDeletionComponent
+    ProductDeletionComponent,
+    UserAdministrationComponent,
+    UserRegistrationComponent,
+    UserAuthenticationComponent
   ],
   imports: [
     HttpClientModule,

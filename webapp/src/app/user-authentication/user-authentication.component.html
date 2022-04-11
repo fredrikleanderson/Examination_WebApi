@@ -1,0 +1,15 @@
+<div ngClass="form-container">
+    <h3>Redan registrerad?</h3>
+    <form autocomplete="off" (submit)="AuthenticateUser()">
+        <div ngClass="form-item">
+            <label for="email">E-postadress</label>
+            <input type="text" name="email" [(ngModel)]="model.email">
+        </div>
+        <div ngClass="form-item">
+            <label for="password">Lösenord</label>
+            <input type="text" name="password" [(ngModel)]="model.password">
+        </div>
+        <div>
+            <button type="submit">Logga in</button>
+        </div>
+    </form>

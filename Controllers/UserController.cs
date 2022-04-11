@@ -8,11 +8,11 @@ namespace Examination_WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AuthenticationController : ControllerBase
+    public class UserController : ControllerBase
     {
         private readonly IUserService _authenticationService;
 
-        public AuthenticationController(IUserService authenticationService)
+        public UserController(IUserService authenticationService)
         {
             _authenticationService = authenticationService;
         }
@@ -24,7 +24,7 @@ namespace Examination_WebApi.Controllers
         }
 
         [HttpPost("SignIn")]
-        public async Task<IActionResult> SignIn(VerifyUser model)
+        public async Task<IActionResult> SignIn(AuthenticateUser model)
         {
             return await _authenticationService.VerifyUserAsync(model);
         }

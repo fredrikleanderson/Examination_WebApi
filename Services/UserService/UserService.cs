@@ -60,7 +60,7 @@ namespace Examination_WebApi.Services.AuthenticationService
             return await _context.Users.AnyAsync(x => x.Email == username);
         }
 
-        public async Task<ActionResult> VerifyUserAsync(VerifyUser model)
+        public async Task<ActionResult> VerifyUserAsync(AuthenticateUser model)
         {
             if (string.IsNullOrEmpty(model.Email) || string.IsNullOrEmpty(model.Password))
             {
@@ -86,13 +86,13 @@ namespace Examination_WebApi.Services.AuthenticationService
                 {
                     new Claim(ClaimTypes.Name, user.Email),
                     new Claim("UserId", user.Id.ToString()),
-                    new Claim("UserKey", _configuration.GetValue<string>("UserKey"))
+                    new Claim("ApiKey", _configuration.GetValue<string>("ApiKey")),
                 }),
 
                 Expires = DateTime.Now.AddDays(1),
 
                 SigningCredentials = new SigningCredentials(
-                    new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetValue<string>("UserKey"))),
+                    new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetValue<string>("SecretKey"))),
                     SecurityAlgorithms.HmacSha512Signature)
             };
 

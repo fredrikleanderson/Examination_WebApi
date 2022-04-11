@@ -59,6 +59,10 @@ input[type=number]{
     width: 178px;
 }
 
+input[type=password]{
+    width: 178px;
+}
+
 button{
     @include button(green, 0.9em);
 }
