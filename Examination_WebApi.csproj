@@ -7,9 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="test\**" />
     <Compile Remove="Website\**" />
+    <Content Remove="test\**" />
     <Content Remove="Website\**" />
+    <EmbeddedResource Remove="test\**" />
     <EmbeddedResource Remove="Website\**" />
+    <None Remove="test\**" />
     <None Remove="Website\**" />
   </ItemGroup>
 
