@@ -10,7 +10,6 @@ import { UserService } from 'src/services/user.service';
 })
 export class UserAuthenticationComponent implements OnInit {
 
-  private apiUrl: string = "https://localhost:7175/api/User/";
   model:AuthenticateUser
   user?: User
 
@@ -28,11 +27,12 @@ export class UserAuthenticationComponent implements OnInit {
     this.userService.login(this.model).subscribe(response => {
       localStorage.setItem('token', response)
     })
-    await new Promise(x => setTimeout(x, 500))
-    this.model = new AuthenticateUser();
+    await new Promise(x => setTimeout(x, 1000))
     if(localStorage.getItem("token")){
+      await new Promise(x => setTimeout(x, 1000))
       this.getCurrentUser()
     }
+    this.model = new AuthenticateUser();
   }
 
    LogOut():void{

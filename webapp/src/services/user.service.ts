@@ -14,7 +14,7 @@ export class UserService {
   private apiUrl: string = "https://localhost:7175/api/User/";
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json',
-    'Authorization': `Bearer ${localStorage.getItem('token')}` 
+    'Authorization': `Bearer ${localStorage.getItem('token')}`
     })
   };
 
@@ -31,5 +31,4 @@ export class UserService {
   currentUser(): Observable<any>{
     return this.http.get(this.apiUrl + 'CurrentUser', this.httpOptions)
   }
-
 }
