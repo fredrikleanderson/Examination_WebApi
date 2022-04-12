@@ -14,8 +14,8 @@ export class ProductService {
   private apiUrl: string = "https://localhost:7175/api/Products";
 
   private httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type':  'application/json'
+    headers: new HttpHeaders({ 'Content-Type': 'application/json',
+    'Authorization': `Bearer ${localStorage.getItem('token')}` 
     })
   };
 

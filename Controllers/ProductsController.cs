@@ -42,6 +42,7 @@ namespace Examination_WebApi.Controllers
         // PUT: api/Products/5
         //To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> PutProductEntity(int id, UpdateProductModel model)
         {
             return await _productService.UpdateProductAsync(id, model);
@@ -50,6 +51,7 @@ namespace Examination_WebApi.Controllers
         // POST: api/Products
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<ActionResult<ReadProductModel>> PostProductEntity(CreateProductModel productEntity)
         {
             return await _productService.CreateProductAsync(productEntity);
@@ -57,6 +59,7 @@ namespace Examination_WebApi.Controllers
 
         // DELETE: api/Products/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteProductEntity(int id)
         {
             return await _productService.DeleteProductAsync(id);

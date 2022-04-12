@@ -19,32 +19,44 @@ export class UserAuthenticationComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.getCurrentUser()
+    if(localStorage.getItem("token")){
+      this.getCurrentUser()
+    }
   }
 
    async LogIn(): Promise<void>{
     this.userService.login(this.model).subscribe(response => {
       localStorage.setItem('token', response)
     })
+    await new Promise(x => setTimeout(x, 500))
     this.model = new AuthenticateUser();
-    await this.getCurrentUser();
+    if(localStorage.getItem("token")){
+      this.getCurrentUser()
+    }
   }
 
-  async LogOut():Promise<void>{
+   LogOut():void{
     localStorage.removeItem("token");
-    await this.getCurrentUser();
+    this.user = null!
   }
 
-  async getCurrentUser(){
-    await fetch(this.apiUrl + "CurrentUser", {
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      }
-    })
-    .then(response => response.json())
-    .then(data => {
-      this.user = data;
+  getCurrentUser(){
+    this.userService.currentUser().subscribe(response =>{
+      this.user = response
     })
   }
+
+
+  //   fetch(this.apiUrl + "CurrentUser", {
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       'Authorization': `Bearer ${localStorage.getItem('token')}`
+  //     }
+  //   })
+  //   .then(response => response.json())
+  //   .then(data => {
+  //     this.user = data;
+  //     console.log(this.user)
+  //   })
+  // }
 }
