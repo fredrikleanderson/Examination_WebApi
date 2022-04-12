@@ -36,6 +36,7 @@ namespace Examination_WebApi.Services.AuthenticationService
                 FirstName = model.FirstName,
                 LastName = model.LastName,
                 Email = model.Email,
+                Role = model.Role,
                 AddressId = (await _addressService.FindOrCreateAddressAsync(model)).Id
             };
             user.CreatePassword(model.Password);
@@ -49,10 +50,52 @@ namespace Examination_WebApi.Services.AuthenticationService
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Email = user.Email,
+                Role = user.Role,
                 StreetAddress = user.Address.StreetAddress,
                 PostalCode = user.Address.PostalCode,
                 City = user.Address.City
             });
+        }
+
+        public async Task<ActionResult> DeleteUserAsync(int id)
+        {
+            UserEntity? user = await _context.Users.Include(x => x.Address).FirstOrDefaultAsync(x => x.Id == id);
+
+            if (user == null)
+            {
+                return new BadRequestResult();
+            }
+
+            _context.Remove(user);
+            await _context.SaveChangesAsync();
+            await _addressService.RemoveEmptyAddressesAsync(user.AddressId);
+
+            return new NoContentResult();
+        }
+
+        public async Task<ActionResult<ReadUser>> GetUserAsync(ClaimsIdentity identity)
+        {
+            var nameIdentifier = identity.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
+
+            UserEntity? user = await _context.Users.Include(x => x.Address)
+                .FirstOrDefaultAsync(x => x.Email == nameIdentifier);
+
+            if (user == null)
+            {
+                return new NotFoundResult();
+            }
+
+            return new ReadUser
+            {
+                Id = user.Id,
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Email = user.Email,
+                Role = user.Role,
+                StreetAddress = user.Address.StreetAddress,
+                PostalCode = user.Address.PostalCode,
+                City = user.Address.City
+            };
         }
 
         public async Task<bool> UserExistsAsync(string username)
@@ -79,25 +122,46 @@ namespace Examination_WebApi.Services.AuthenticationService
                 return new BadRequestObjectResult("Incorrect password or email.");
             }
 
-            var tokenHandler = new JwtSecurityTokenHandler();
-            var tokenDescriptor = new SecurityTokenDescriptor
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+
+            var claims = new[]
             {
-                Subject = new ClaimsIdentity(new Claim[]
-                {
-                    new Claim(ClaimTypes.Name, user.Email),
-                    new Claim("UserId", user.Id.ToString()),
-                    new Claim("ApiKey", _configuration.GetValue<string>("ApiKey")),
-                }),
-
-                Expires = DateTime.Now.AddDays(1),
-
-                SigningCredentials = new SigningCredentials(
-                    new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetValue<string>("SecretKey"))),
-                    SecurityAlgorithms.HmacSha512Signature)
+                new Claim(ClaimTypes.NameIdentifier, user.Email),
+                new Claim(ClaimTypes.Email, user.Email),
+                new Claim(ClaimTypes.GivenName, user.FirstName),
+                new Claim(ClaimTypes.Surname, user.LastName),
+                new Claim(ClaimTypes.Role, user.Role)
             };
 
-            var accessToken = tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor));
-            return new OkObjectResult(accessToken);
+            var token = new JwtSecurityToken(_configuration["Jwt:Issuer"], 
+                _configuration["Jwt:Audience"], 
+                claims, 
+                expires: DateTime.Now.AddDays(1), 
+                signingCredentials: credentials);
+
+            return new OkObjectResult(new JwtSecurityTokenHandler().WriteToken(token));
+
+
+            //var tokenHandler = new JwtSecurityTokenHandler();
+            //var tokenDescriptor = new SecurityTokenDescriptor
+            //{
+            //    Subject = new ClaimsIdentity(new Claim[]
+            //    {
+            //        new Claim(ClaimTypes.Name, user.Email),
+            //        new Claim("UserId", user.Id.ToString()),
+            //        new Claim("ApiKey", _configuration.GetValue<string>("ApiKey")),
+            //    }),
+
+            //    Expires = DateTime.Now.AddDays(1),
+
+            //    SigningCredentials = new SigningCredentials(
+            //        new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetValue<string>("SecretKey"))),
+            //        SecurityAlgorithms.HmacSha512Signature)
+            //};
+
+            //var accessToken = tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor));
+            //return new OkObjectResult(accessToken);
         }
     }
 }

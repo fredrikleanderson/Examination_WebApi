@@ -26,6 +26,10 @@ namespace Examination_WebApi.Models.Entities
         public string Email { get; set; } = null!;
 
         [Required]
+        [Column(TypeName = "nvarchar(100)")]
+        public string Role { get; set; } = null!;
+
+        [Required]
         [ForeignKey("Address")]
         public int AddressId { get; set; }
 

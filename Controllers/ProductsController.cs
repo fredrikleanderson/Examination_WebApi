@@ -10,6 +10,7 @@ using Examination_WebApi.Data;
 using Examination_WebApi.Models.Entities;
 using Examination_WebApi.ProductService.Services;
 using Examination_WebApi.Models.Products;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Examination_WebApi.Controllers
 {

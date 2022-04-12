@@ -25,35 +25,52 @@ builder.Services.AddScoped<IInventoryService, InventoryService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAddressService, AddressService>();
 
-builder.Services.AddAuthentication(x =>
-{
-    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-}).AddJwtBearer(x =>
-{
-    x.Events = new JwtBearerEvents
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(x =>
     {
-        OnTokenValidated = context =>
+        x.TokenValidationParameters = new TokenValidationParameters
         {
-            if (context.Principal != null && context.Principal.Identity != null && string.IsNullOrEmpty(context.Principal.Identity.Name))
-            {
-                context.Fail("Unauthorized");
-            }
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Jwt:Issuer"],
+            ValidAudience = builder.Configuration["Jwt:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+        };
+    });
 
-            return Task.CompletedTask;
-        }
-    };
 
-    x.RequireHttpsMetadata = true;
-    x.SaveToken = true;
-    x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
-    {
-        ValidateIssuer = false,
-        ValidateIssuerSigningKey = true,
-        ValidateAudience = false,
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetValue<string>("SecretKey")))
-    };
-});
+
+//builder.Services.AddAuthentication(x =>
+//{
+//    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+//    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+//}).AddJwtBearer(x =>
+//{
+//    x.Events = new JwtBearerEvents
+//    {
+//        OnTokenValidated = context =>
+//        {
+//            if (context.Principal != null && context.Principal.Identity != null && string.IsNullOrEmpty(context.Principal.Identity.Name))
+//            {
+//                context.Fail("Unauthorized");
+//            }
+
+//            return Task.CompletedTask;
+//        }
+//    };
+
+//    x.RequireHttpsMetadata = true;
+//    x.SaveToken = true;
+//    x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+//    {
+//        ValidateIssuer = false,
+//        ValidateIssuerSigningKey = true,
+//        ValidateAudience = false,
+//        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration.GetValue<string>("SecretKey")))
+//    };
+//});
 
 var app = builder.Build();
 

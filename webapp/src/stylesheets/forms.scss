@@ -63,6 +63,10 @@ input[type=password]{
     width: 178px;
 }
 
+select{
+    width: 178px;
+}
+
 button{
     @include button(green, 0.9em);
 }
