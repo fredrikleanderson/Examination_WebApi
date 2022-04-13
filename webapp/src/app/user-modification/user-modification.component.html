@@ -1,1 +1,32 @@
-<p>user-modification works!</p>
+<div ngClass="form-container">
+    <h3>Uppdatera användaruppgifter</h3>
+    <form autocomplete="off" (submit)="UpdateUser()">
+        <div ngClass="form-item">
+            <label for="firstName">Förnamn</label>
+            <input type="text" name="firstName" [(ngModel)]="model.firstName">
+        </div>
+        <div ngClass="form-item">
+            <label for="lastName">Efternamn</label>
+            <input type="text" name="lastName" [(ngModel)]="model.lastName">
+        </div>
+        <div ngClass="form-item">
+            <label for="password">Nytt lösenord</label>
+            <input type="password" name="password" [(ngModel)]="model.password">
+        </div>
+        <div ngClass="form-item">
+            <label for="streetAdress">Adress</label>
+            <input type="text" name="streetAdress" [(ngModel)]="model.streetAddress">
+        </div>
+        <div ngClass="form-item">
+            <label for="postalCode">Postnummer</label>
+            <input type="text" name="postalCode" [(ngModel)]="model.postalCode">
+        </div>
+        <div ngClass="form-item">
+            <label for="city">Stad</label>
+            <input type="text" name="city" [(ngModel)]="model.city">
+        </div>
+        <div>
+            <button type="submit">Uppdatera användare</button>
+        </div>
+    </form>
+</div>

@@ -33,7 +33,7 @@ namespace Examination_WebApi.Controllers
         }
 
         [HttpPost]
-        [Authorize]
+        [Authorize(Roles ="Admin, User")]
         public async Task<ActionResult<ReadUser>> CurrentUser(AuthenticateUser user)
         {
             if (user != null)
@@ -45,7 +45,7 @@ namespace Examination_WebApi.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles="Admin, User")]
+        [Authorize(Roles ="Admin, User")]
         public async Task<ActionResult<ReadUser>> CurrentUser()
         {
             var identity = HttpContext.User.Identity as ClaimsIdentity;
@@ -60,10 +60,18 @@ namespace Examination_WebApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin, User")]
+        [Authorize(Roles ="Admin, User")]
         public async Task<IActionResult> DeleteUser(int id)
         {
             return await _userService.DeleteUserAsync(id);
         }
+
+        [HttpPut("{id}")]
+        [Authorize(Roles = "Admin, User")]
+        public async Task<IActionResult> UpdateUser(int id, UpdateUser model)
+        {
+            return await _userService.UpdateUser(id, model);
+        }
+
     }
 }

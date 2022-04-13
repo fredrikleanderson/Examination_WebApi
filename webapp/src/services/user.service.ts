@@ -5,6 +5,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from 'src/entities/user';
 import { AuthenticateUser } from 'src/models/authenticate-user';
+import { UpdateUser } from 'src/models/update-user';
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +42,10 @@ export class UserService {
   }
 
   deleteUser(id:number): Observable<any>{
-    return this.http.delete(this.apiUrl + `/${id}`, this.httpOptions)
+    return this.http.delete(this.apiUrl + `${id}`, this.httpOptions)
+  }
+
+  updateUser(id:number, user:UpdateUser): Observable<any>{
+    return this.http.put<UpdateUser>(this.apiUrl + `${id}`, user, this.httpOptions)
   }
 }

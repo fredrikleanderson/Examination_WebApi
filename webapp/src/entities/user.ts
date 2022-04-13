@@ -4,7 +4,7 @@ export interface User {
     lastName?: string;
     email?: string;
     role?: string;
-    streetAdress?: string;
+    streetAddress?: string;
     postalCode?: string;
     city?: string;
 }

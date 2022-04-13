@@ -109,6 +109,35 @@ namespace Examination_WebApi.Services.AuthenticationService
             };
         }
 
+        public async Task<ActionResult> UpdateUser(int id, UpdateUser model)
+        {
+            UserEntity? user = await _context.Users.Include(x => x.Address)
+                .FirstOrDefaultAsync(x => x.Id == id);
+
+            if (user == null)
+            {
+                return new BadRequestObjectResult("User not found");
+            }
+
+            int adressId = user.AddressId;
+
+            user.FirstName = model.FirstName;
+            user.LastName = model.LastName;
+            user.CreatePassword(model.Password);
+            user.AddressId = (await _addressService.FindOrCreateAddressAsync(new CreateUser
+            {
+                StreetAddress = model.StreetAddress,
+                PostalCode = model.PostalCode,
+                City = model.City
+            })).Id;
+
+            _context.Entry(user).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+            await _addressService.RemoveEmptyAddressesAsync(adressId);
+
+            return new OkObjectResult("User updated");
+        }
+
         public async Task<bool> UserExistsAsync(string username)
         {
             return await _context.Users.AnyAsync(x => x.Email == username);
