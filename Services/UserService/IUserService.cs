@@ -10,6 +10,6 @@ namespace Examination_WebApi.Services.AuthenticationService
         Task<ActionResult<ReadUser>> CreateUserAsync(CreateUser model);
         Task<ActionResult> VerifyUserAsync(AuthenticateUser model);
         Task<ActionResult> DeleteUserAsync(int id);
-        Task<ActionResult<ReadUser>> GetUserAsync(ClaimsIdentity claimsidentity);
+        Task<ActionResult<ReadUser>> GetUserAsync(string email);
     }
 }

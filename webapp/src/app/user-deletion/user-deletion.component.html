@@ -1,0 +1,11 @@
+<div ngClass="form-container">
+    <h3>Radera användare</h3>
+    <form (submit)="DeleteUser()">
+        <div *ngIf="user" ngClass="form-item">
+            <p>{{user.email}}</p>
+        </div>
+        <div ngClass="form-btns">
+            <button type="submit" name="delete">Radera användare</button>
+        </div>
+    </form>
+</div>

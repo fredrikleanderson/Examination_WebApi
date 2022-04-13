@@ -10,11 +10,13 @@ import { UserService } from 'src/services/user.service';
 })
 export class UserAuthenticationComponent implements OnInit {
 
+  private apiUrl: string = "https://localhost:7175/api/User/";
   model:AuthenticateUser
   user?: User
 
   constructor(private userService:UserService) {
     this.model = new AuthenticateUser()
+    this.user = this.userService.loggedInUser
    }
 
   ngOnInit(): void {
@@ -29,8 +31,7 @@ export class UserAuthenticationComponent implements OnInit {
     })
     await new Promise(x => setTimeout(x, 1000))
     if(localStorage.getItem("token")){
-      await new Promise(x => setTimeout(x, 1000))
-      this.getCurrentUser()
+      this.getUser(this.model)
     }
     this.model = new AuthenticateUser();
   }
@@ -38,6 +39,7 @@ export class UserAuthenticationComponent implements OnInit {
    LogOut():void{
     localStorage.removeItem("token");
     this.user = null!
+    this.userService.loggedInUser = null!
   }
 
   getCurrentUser(){
@@ -46,17 +48,19 @@ export class UserAuthenticationComponent implements OnInit {
     })
   }
 
-
-  //   fetch(this.apiUrl + "CurrentUser", {
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //       'Authorization': `Bearer ${localStorage.getItem('token')}`
-  //     }
-  //   })
-  //   .then(response => response.json())
-  //   .then(data => {
-  //     this.user = data;
-  //     console.log(this.user)
-  //   })
-  // }
+  getUser(user:User){
+    fetch(this.apiUrl, {
+      method: 'post',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`
+      },
+      body: JSON.stringify(user)
+    })
+    .then(response => response.json())
+    .then(data => {
+      this.user = data
+    })
+  }
 }
+

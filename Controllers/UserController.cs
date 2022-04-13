@@ -32,18 +32,31 @@ namespace Examination_WebApi.Controllers
             return await _userService.VerifyUserAsync(model);
         }
 
-        [HttpGet("CurrentUser")]
-        [Authorize(Roles = "User, Admin")]
+        [HttpPost]
+        [Authorize]
+        public async Task<ActionResult<ReadUser>> CurrentUser(AuthenticateUser user)
+        {
+            if (user != null)
+            {
+                return await _userService.GetUserAsync(user.Email);
+            }
+
+            return new NotFoundObjectResult("No user found");
+        }
+
+        [HttpGet]
+        [Authorize]
         public async Task<ActionResult<ReadUser>> CurrentUser()
         {
             var identity = HttpContext.User.Identity as ClaimsIdentity;
+            string? email = identity?.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
 
-            if (identity != null)
+            if (email != null)
             {
-                return await _userService.GetUserAsync(identity);
+                return await _userService.GetUserAsync(email);
             }
 
-            return new NoContentResult();
+            return new NotFoundObjectResult("No user found");
         }
 
         [HttpDelete("{id}")]

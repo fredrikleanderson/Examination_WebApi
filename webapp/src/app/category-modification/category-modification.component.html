@@ -1,0 +1,19 @@
+<div ngClass="form-container">
+    <h3>Uppdatera kategori</h3>
+    <form autocomplete="off" (submit)="UpdateCategory()">
+        <div ngClass="form-item">
+            <label for="categories">Välj kategori</label>
+            <select name="categories" id="categories" ngClass="form-select" [(ngModel)]="selectedCategoryId" (change)="SelectCategory()">
+                <option value="" selected disabled>Välj kategori</option>
+                <option *ngFor="let category of categories" [value]="category.id">{{category.name}}</option>
+            </select>
+        </div>
+        <div ngClass="form-item">
+            <label for="name">Nytt namn</label>
+            <input type="text" name="name" [(ngModel)]="model.name">
+        </div>
+        <div ngClass="form-btns">
+            <button type="submit">Uppdatera kategori</button>
+        </div>
+    </form>
+</div>

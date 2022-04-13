@@ -1,0 +1,7 @@
+<div *ngIf="!user" ngClass="container">
+    <h3>Du måste vara inloggad. Gå till inloggning.</h3>
+</div>
+<div *ngIf="user" ngClass="container">
+    <app-user-modification></app-user-modification>
+    <app-user-deletion></app-user-deletion>
+</div>

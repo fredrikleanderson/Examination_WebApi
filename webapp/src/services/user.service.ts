@@ -18,7 +18,15 @@ export class UserService {
     })
   };
 
-  constructor(private http:HttpClient) { }
+  loggedInUser?: User
+
+  constructor(private http:HttpClient) {
+    if(localStorage.getItem("token")){
+      this.currentUser().subscribe(response =>{
+        this.loggedInUser = response
+      })
+    }
+   }
 
   createUser(user:CreateUser): Observable<User>{
     return this.http.post<User>(this.apiUrl + 'SignUp', user, this.httpOptions)
@@ -28,7 +36,11 @@ export class UserService {
     return this.http.post(this.apiUrl + 'SignIn', user, {responseType: 'text'})
   }
 
-  currentUser(): Observable<any>{
-    return this.http.get(this.apiUrl + 'CurrentUser', this.httpOptions)
+  currentUser(): Observable<User>{
+    return this.http.get(this.apiUrl, this.httpOptions)
+  }
+
+  deleteUser(id:number): Observable<any>{
+    return this.http.delete(this.apiUrl + `/${id}`, this.httpOptions)
   }
 }

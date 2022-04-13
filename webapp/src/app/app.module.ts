@@ -15,6 +15,10 @@ import { ProductDeletionComponent } from './product-deletion/product-deletion.co
 import { UserAdministrationComponent } from './user-administration/user-administration.component';
 import { UserRegistrationComponent } from './user-registration/user-registration.component';
 import { UserAuthenticationComponent } from './user-authentication/user-authentication.component';
+import { CategoryModificationComponent } from './category-modification/category-modification.component';
+import { UserPageComponent } from './user-page/user-page.component';
+import { UserModificationComponent } from './user-modification/user-modification.component';
+import { UserDeletionComponent } from './user-deletion/user-deletion.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,11 @@ import { UserAuthenticationComponent } from './user-authentication/user-authenti
     ProductDeletionComponent,
     UserAdministrationComponent,
     UserRegistrationComponent,
-    UserAuthenticationComponent
+    UserAuthenticationComponent,
+    CategoryModificationComponent,
+    UserPageComponent,
+    UserModificationComponent,
+    UserDeletionComponent
   ],
   imports: [
     HttpClientModule,

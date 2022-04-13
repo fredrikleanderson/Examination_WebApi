@@ -73,12 +73,10 @@ namespace Examination_WebApi.Services.AuthenticationService
             return new NoContentResult();
         }
 
-        public async Task<ActionResult<ReadUser>> GetUserAsync(ClaimsIdentity identity)
+        public async Task<ActionResult<ReadUser>> GetUserAsync(string email)
         {
-            var nameIdentifier = identity.Claims.FirstOrDefault(x => x.Type == ClaimTypes.NameIdentifier)?.Value;
-
             UserEntity? user = await _context.Users.Include(x => x.Address)
-                .FirstOrDefaultAsync(x => x.Email == nameIdentifier);
+                .FirstOrDefaultAsync(x => x.Email == email);
 
             if (user == null)
             {
