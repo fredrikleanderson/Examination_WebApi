@@ -44,7 +44,7 @@ namespace Examination_WebApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Addresses");
+                    b.ToTable("Addresses", (string)null);
                 });
 
             modelBuilder.Entity("Examination_WebApi.Models.Entities.CategoryEntity", b =>
@@ -64,7 +64,7 @@ namespace Examination_WebApi.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("Examination_WebApi.Models.Entities.InventoryEntity", b =>
@@ -80,7 +80,7 @@ namespace Examination_WebApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Inventories");
+                    b.ToTable("Inventories", (string)null);
                 });
 
             modelBuilder.Entity("Examination_WebApi.Models.Entities.ProductEntity", b =>
@@ -115,7 +115,7 @@ namespace Examination_WebApi.Migrations
                     b.HasIndex("InventoryId")
                         .IsUnique();
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("Examination_WebApi.Models.Entities.UserEntity", b =>
@@ -160,7 +160,7 @@ namespace Examination_WebApi.Migrations
                     b.HasIndex("Email")
                         .IsUnique();
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("Examination_WebApi.Models.Entities.ProductEntity", b =>

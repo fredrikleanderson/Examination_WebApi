@@ -66,9 +66,22 @@ namespace Examination_WebApi.Services.AuthenticationService
                 return new BadRequestResult();
             }
 
-            _context.Remove(user);
+            int adressId = user.AddressId;
+
+            user.FirstName = "Borttagen";
+            user.LastName = "Borttagen";
+            user.Role = "Deleted";
+            user.Email = Guid.NewGuid().ToString();
+            user.Address = await _addressService.FindOrCreateAddressAsync(new CreateUser
+            {
+                StreetAddress = "Borttagen",
+                PostalCode = "00000",
+                City = "Borttagen"
+            });
+
+            _context.Entry(user).State = EntityState.Modified;
             await _context.SaveChangesAsync();
-            await _addressService.RemoveEmptyAddressesAsync(user.AddressId);
+            await _addressService.RemoveEmptyAddressesAsync(adressId);
 
             return new NoContentResult();
         }
@@ -139,27 +152,6 @@ namespace Examination_WebApi.Services.AuthenticationService
                 signingCredentials: credentials);
 
             return new OkObjectResult(new JwtSecurityTokenHandler().WriteToken(token));
-
-
-            //var tokenHandler = new JwtSecurityTokenHandler();
-            //var tokenDescriptor = new SecurityTokenDescriptor
-            //{
-            //    Subject = new ClaimsIdentity(new Claim[]
-            //    {
-            //        new Claim(ClaimTypes.Name, user.Email),
-            //        new Claim("UserId", user.Id.ToString()),
-            //        new Claim("ApiKey", _configuration.GetValue<string>("ApiKey")),
-            //    }),
-
-            //    Expires = DateTime.Now.AddDays(1),
-
-            //    SigningCredentials = new SigningCredentials(
-            //        new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.GetValue<string>("SecretKey"))),
-            //        SecurityAlgorithms.HmacSha512Signature)
-            //};
-
-            //var accessToken = tokenHandler.WriteToken(tokenHandler.CreateToken(tokenDescriptor));
-            //return new OkObjectResult(accessToken);
         }
     }
 }
