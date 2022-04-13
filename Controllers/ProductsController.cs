@@ -64,10 +64,5 @@ namespace Examination_WebApi.Controllers
         {
             return await _productService.DeleteProductAsync(id);
         }
-
-        //private bool ProductEntityExists(int id)
-        //{
-        //    return _context.Products.Any(e => e.Id == id);
-        //}
     }
 }

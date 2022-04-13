@@ -10,6 +10,7 @@ using Examination_WebApi.Data;
 using Examination_WebApi.Models.Entities;
 using Examination_WebApi.Services.CategoryService;
 using Examination_WebApi.Models.Products;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Examination_WebApi.Controllers
 {
@@ -40,6 +41,7 @@ namespace Examination_WebApi.Controllers
 
         // PUT: api/Categories/5
         [HttpPut("{id}")]
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> PutCategoryEntity(int id, UpdateCategoryModel model)
         {
             return await _categoryService.UpdateCategoryAsync(id, model);
