@@ -32,6 +32,7 @@ export class UserAuthenticationComponent implements OnInit {
     await new Promise(x => setTimeout(x, 1000))
     if(localStorage.getItem("token")){
       this.getUser(this.model)
+      this.userService.refreshUser();
     }
     this.model = new AuthenticateUser();
   }

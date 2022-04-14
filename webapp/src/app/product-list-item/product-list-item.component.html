@@ -20,8 +20,14 @@
     <div ngClass="container-element">
         <p>Antal i lager: {{product?.quantity}}</p>
     </div>
-    <div ngClass="container-element">
-        <button (click)="AddToBasket()">Lägg till</button>
+    <div ngClass="quantity-element">
+        <div>
+            <button (click)="AddToCart()">Lägg till</button>
+        </div>
+        <div>
+            <label for="quantity">Antal</label>
+            <input autocomplete="off" id="quantity" placeholder="0" min="0" max="{{product.quantity}}" type="number" name="quantity" [(ngModel)]="cartItem.quantity">
+        </div>
     </div>
 </div>
 

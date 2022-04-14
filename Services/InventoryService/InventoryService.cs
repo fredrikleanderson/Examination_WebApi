@@ -1,6 +1,7 @@
 ﻿using Examination_WebApi.Data;
 using Examination_WebApi.Models.Entities;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Examination_WebApi.Services.InventoryService
 {
@@ -39,10 +40,21 @@ namespace Examination_WebApi.Services.InventoryService
             await _context.SaveChangesAsync();
         }
 
-        public Task<ActionResult> UpdateProductInventoryAsync(int productId)
+        public async Task<ActionResult> DecrementProductInventoryAsync(int productId, int quantity)
         {
-            //Använd eventuellt senare när ordrar är ordnat
-            throw new NotImplementedException();
+            InventoryEntity? inventory = await _context.Inventories.Include(x => x.Product)
+                .FirstOrDefaultAsync(x => x.Product.Id == productId);
+
+            if(inventory == null)
+            {
+                return new BadRequestObjectResult("Inventory not found");
+            }
+
+            inventory.Quantity -= quantity;
+            _context.Entry(inventory).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return new OkObjectResult("Inventory adjusted");
         }
     }
 }

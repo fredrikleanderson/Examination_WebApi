@@ -15,6 +15,7 @@ export class ProductListComponent implements OnInit {
   products?: Product[];
   categories?: Category[];
 
+
   filterCategories(): void{
     this.productService.getProducts().subscribe(response =>{
       if(this.selectedCategory == ""){

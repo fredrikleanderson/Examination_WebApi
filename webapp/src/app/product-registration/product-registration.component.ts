@@ -17,9 +17,11 @@ export class ProductRegistrationComponent implements OnInit {
   product?: Product;
 
   CreateProduct(): void {
-    this.productService.createProduct(this.model).subscribe(response =>{
-      this.product = response;
-    })
+    if(localStorage.getItem("token")){
+      this.productService.createProduct(this.model).subscribe(response =>{
+        this.product = response;
+      })
+    }
   }
 
   constructor(private productService:ProductService, private categoryService:CategoryService) {

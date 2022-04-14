@@ -25,9 +25,11 @@ export class CategoryModificationComponent implements OnInit {
   }
 
   UpdateCategory(): void{
-    this.categoryService.updateCategory(this.selectedCategoryId, this.model).subscribe(response =>{
-      console.log(response)
-    })
+    if(localStorage.getItem("token")){
+      this.categoryService.updateCategory(this.selectedCategoryId, this.model).subscribe(response =>{
+        console.log(response)
+      })
+    }
   }
 
   SelectCategory(): void{

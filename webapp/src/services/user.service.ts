@@ -23,9 +23,7 @@ export class UserService {
 
   constructor(private http:HttpClient) {
     if(localStorage.getItem("token")){
-      this.currentUser().subscribe(response =>{
-        this.loggedInUser = response
-      })
+      this.refreshUser();
     }
    }
 
@@ -47,5 +45,11 @@ export class UserService {
 
   updateUser(id:number, user:UpdateUser): Observable<any>{
     return this.http.put<UpdateUser>(this.apiUrl + `${id}`, user, this.httpOptions)
+  }
+
+  refreshUser(): void{
+    this.currentUser().subscribe(response =>{
+      this.loggedInUser = response
+    })
   }
 }

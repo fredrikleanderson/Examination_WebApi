@@ -13,7 +13,7 @@ export class ProductDeletionComponent implements OnInit {
   products?: Product[];
 
   DeleteProduct(): void{
-    if(this.selectedProductId != null){
+    if(this.selectedProductId != null && localStorage.getItem("token")){
       this.productService.deleteProduct(this.selectedProductId).subscribe(response =>{
         console.log(response)
       })

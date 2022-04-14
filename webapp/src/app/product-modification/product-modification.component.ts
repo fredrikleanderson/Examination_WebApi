@@ -30,7 +30,7 @@ export class ProductModificationComponent implements OnInit {
   }
 
   UpdateProduct(): void{
-    if(this.selectedProductId != null){
+    if(this.selectedProductId != null && localStorage.getItem("token")){
       this.productService.updateProduct(this.selectedProductId, this.model).subscribe(response => {
       })
     }

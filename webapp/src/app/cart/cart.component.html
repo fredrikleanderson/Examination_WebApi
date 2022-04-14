@@ -1,0 +1,20 @@
+<div *ngIf="!user" ngClass="container">
+    <h3>Du måste vara inloggad. Gå till inloggning.</h3>
+</div>
+<div *ngIf="user" ngClass="container">
+    <h3>Din varukorg</h3>
+</div>
+<div *ngIf="user" ngClass="container">
+    <table>
+        <tr>
+            <th>Artikelnummer</th>
+            <th>Servett</th>
+            <th>Antal</th>
+        </tr>
+        <tr *ngFor="let cartItem of cartItems">
+            <td>{{cartItem.articleNumber}}</td>
+            <td>{{cartItem.productName}}</td>
+            <td>{{cartItem.quantity}}</td>
+        </tr>
+    </table>
+</div>

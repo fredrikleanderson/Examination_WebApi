@@ -11,6 +11,11 @@ $item-width: 230px;
     border: 1px solid #a9a9a9;
     border-radius: 5px;
 
+    .quantity-element{
+        justify-content: space-around;
+        display: inline-flex;
+    }
+
     .container-element{
         @include flex-container($item-width, auto);
         margin: 2px auto;
@@ -26,8 +31,6 @@ $item-width: 230px;
             margin: auto 5px;
         }
     }
-
-
 }
 
 button{
