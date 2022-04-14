@@ -37,7 +37,7 @@ namespace Examination_WebApi.Controllers
         [Authorize(Roles = "Admin, User")]
         public async Task DeleteCartItem(int id, RemoveCartItem model)
         {
-            await _cartService.DeleteCartItem(id, model);
+            await _cartService.RemoveItemFromCart(id, model);
         }
 
     }

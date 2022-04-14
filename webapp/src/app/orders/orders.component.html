@@ -1,0 +1,6 @@
+<div *ngIf="!user" ngClass="container">
+    <h3>Du måste vara inloggad. Gå till inloggning.</h3>
+</div>
+<div *ngIf="user" ngClass="container">
+    <h3>Alla ordrar (Bara admins kan se)</h3>
+</div>

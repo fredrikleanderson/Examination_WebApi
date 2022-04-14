@@ -132,7 +132,7 @@ namespace Examination_WebApi.ProductService.Services
                 return new BadRequestResult();
             }
 
-            await _cartService.DeleteAllCartItemsWithProduct(product.Id);
+            await _cartService.DeleteAllCartItemsWithDeletedProduct(product.Id);
 
             _context.Products.Remove(product);
             await _context.SaveChangesAsync();

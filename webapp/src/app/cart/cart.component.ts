@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { CartItem } from 'src/entities/cart-item';
 import { User } from 'src/entities/user';
 import { DeleteCartItem } from 'src/models/delete-cart-item';
+import { PlaceOrder } from 'src/models/place-order';
 import { CartService } from 'src/services/cart.service';
+import { OrderService } from 'src/services/order.service';
 import { UserService } from 'src/services/user.service';
 
 @Component({
@@ -14,8 +16,9 @@ export class CartComponent implements OnInit {
 
   user?:User
   cartItems?: CartItem[]
+  order?: PlaceOrder
 
-  constructor(private userService:UserService, private cartService:CartService) { }
+  constructor(private userService:UserService, private cartService:CartService, private orderService:OrderService) { }
 
   ngOnInit(): void {
     if(localStorage.getItem("token")){
@@ -32,5 +35,12 @@ export class CartComponent implements OnInit {
         return element.id != cartItem.id
       })
     })
+  }
+
+  PlaceOrder():void{
+    if(this.user){
+      this.orderService.placeOrder(new PlaceOrder(this.user.id!, new Date(), "Order Received")).subscribe(response =>{
+      })
+    }
   }
 }

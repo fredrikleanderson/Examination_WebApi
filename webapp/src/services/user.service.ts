@@ -12,7 +12,7 @@ import { UpdateUser } from 'src/models/update-user';
 })
 export class UserService {
 
-  private apiUrl: string = "https://localhost:7175/api/User/";
+  private apiUrl: string = "https://localhost:7175/api/Users/";
   private httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json',
     'Authorization': `Bearer ${localStorage.getItem('token')}`

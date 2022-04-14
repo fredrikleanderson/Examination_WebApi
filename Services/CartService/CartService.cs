@@ -86,7 +86,7 @@ namespace Examination_WebApi.Services.CartService
             });
         }
 
-        public async Task DeleteAllCartItemsWithProduct(int productId)
+        public async Task DeleteAllCartItemsWithDeletedProduct(int productId)
         {
             IEnumerable<CartItemEntity>? cartItems = await _context.CartItems.Where(x => x.ProductId == productId).ToListAsync();
 
@@ -115,7 +115,7 @@ namespace Examination_WebApi.Services.CartService
             return new OkObjectResult("Cart removed");
         }
 
-        public async Task DeleteCartItem(int userId, RemoveCartItem model)
+        public async Task RemoveItemFromCart(int userId, RemoveCartItem model)
         {
             CartItemEntity? cartItem = await _context.CartItems.Include(x => x.Cart).ThenInclude(x => x.User)
                 .FirstOrDefaultAsync(x => x.Cart.User.Id == userId && x.ProductId == model.ProductId);
