@@ -38,8 +38,9 @@ export class CartComponent implements OnInit {
   }
 
   PlaceOrder():void{
-    if(this.user){
+    if(this.user && this.cartItems?.length! > 0){
       this.orderService.placeOrder(new PlaceOrder(this.user.id!, new Date(), "Order Received")).subscribe(response =>{
+        console.log(response)
       })
     }
   }
