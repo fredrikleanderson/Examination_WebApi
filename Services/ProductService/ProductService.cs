@@ -32,7 +32,7 @@ namespace Examination_WebApi.ProductService.Services
                 InventoryId = (await _inventoryService.CreateProductInventoryAsync(model.Quantity)).Id
             };
 
-            await _context.AddAsync(product);
+            await _context.Products.AddAsync(product);
             await _context.SaveChangesAsync();
 
             return new ObjectResult(new ReadProductModel

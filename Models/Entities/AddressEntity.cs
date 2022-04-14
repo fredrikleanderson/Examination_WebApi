@@ -20,6 +20,6 @@ namespace Examination_WebApi.Models.Entities
         [Column(TypeName = "nvarchar(50)")]
         public string City { get; set; } = null!;
 
-        public virtual ICollection<UserEntity>? Users { get; set; }
+        public virtual ICollection<UserEntity> Users { get; set; } = null!;
     }
 }

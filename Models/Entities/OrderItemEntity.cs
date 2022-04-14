@@ -3,21 +3,24 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Examination_WebApi.Models.Entities
 {
-    public class OrderedProductEntity
+    public class OrderItemEntity
     {
         [Key]
         public int Id { get; set; }
 
+        [Required]
         public int Quantity { get; set; }
+
+        [Required]
+        public int ArticleNumber { get; set; }
+
+        [Required]
+        [Column(TypeName = "nvarchar(100)")]
+        public string ProductName { get; set; } = null!;
 
         [Required]
         [ForeignKey("Order")]
         public int OrderId { get; set; }
         public virtual OrderEntity Order { get; set; } = null!;
-
-        [Required]
-        [ForeignKey("Product")]
-        public int ProductId { get; set; }
-        public virtual ProductEntity Product { get; set; } = null!;
     }
 }

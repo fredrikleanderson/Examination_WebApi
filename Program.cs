@@ -2,6 +2,7 @@ using Examination_WebApi.Data;
 using Examination_WebApi.ProductService.Services;
 using Examination_WebApi.Services.AddressService;
 using Examination_WebApi.Services.AuthenticationService;
+using Examination_WebApi.Services.CartService;
 using Examination_WebApi.Services.CategoryService;
 using Examination_WebApi.Services.InventoryService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -25,6 +26,7 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IInventoryService, InventoryService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IAddressService, AddressService>();
+builder.Services.AddScoped<ICartService, CartService>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(x =>

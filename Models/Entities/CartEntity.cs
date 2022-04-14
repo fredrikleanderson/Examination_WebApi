@@ -3,23 +3,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Examination_WebApi.Models.Entities
 {
-    public class OrderEntity
+    public class CartEntity
     {
         [Key]
         public int Id { get; set; }
 
-        [Required]
-        public DateTime OrderRecieved { get; set; }
-
-        [Required]
-        [Column(TypeName = "nvarchar(20)")]
-        public string OrderStatus { get; set; } = null!;
-
-        [Required]
         [ForeignKey("User")]
+        [Required]
         public int UserId { get; set; }
 
         public virtual UserEntity User { get; set; } = null!;
-        public virtual ICollection<OrderItemEntity> OrderItems { get; set; } = null!;
+        public virtual ICollection<CartItemEntity> CartItems { get; set; } = null!;
     }
 }

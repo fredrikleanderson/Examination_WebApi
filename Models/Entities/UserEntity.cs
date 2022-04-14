@@ -41,6 +41,9 @@ namespace Examination_WebApi.Models.Entities
         [Required]
         public byte[] Salt { get; private set; } = null!;
 
+        public virtual CartEntity Cart { get; set; } = null!;
+        public virtual ICollection<OrderEntity> Orders { get; set; } = null!;
+
         public void CreatePassword(string password)
         {
             using var hmac = new HMACSHA512();

@@ -17,8 +17,10 @@ namespace Examination_WebApi.Data
         public virtual DbSet<ProductEntity> Products { get; set; } = null!;
         public virtual DbSet<CategoryEntity> Categories { get; set; } = null!;
         public virtual DbSet<InventoryEntity> Inventories { get; set; } = null!;
-        //public virtual DbSet<OrderEntity> Orders { get; set; } = null!;
-        //public virtual DbSet<OrderedProductEntity> OrderedProducts { get; set; } = null!;
+        public virtual DbSet<CartEntity> Carts { get; set; } = null!;
+        public virtual DbSet<CartItemEntity> CartItems { get; set; } = null!;
+        public virtual DbSet<OrderEntity> Orders { get; set; } = null!;
+        public virtual DbSet<OrderItemEntity> OrderItems { get; set; } = null!;
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -2,6 +2,7 @@
 using Examination_WebApi.Models.Entities;
 using Examination_WebApi.Models.Users;
 using Examination_WebApi.Services.AddressService;
+using Examination_WebApi.Services.CartService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -15,12 +16,14 @@ namespace Examination_WebApi.Services.AuthenticationService
     {
         private readonly DataContext _context;
         private readonly IAddressService _addressService;
+        private readonly ICartService _cartService;
         private readonly IConfiguration _configuration;
 
-        public UserService(DataContext context, IAddressService addressService, IConfiguration configuration)
+        public UserService(DataContext context, IAddressService addressService, ICartService cartService, IConfiguration configuration)
         {
             _context = context;
             _addressService = addressService;
+            _cartService = cartService;
             _configuration = configuration;
         }
 
@@ -43,6 +46,7 @@ namespace Examination_WebApi.Services.AuthenticationService
 
             await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
+            await _cartService.AddCart(user.Id);
 
             return new OkObjectResult (new ReadUser
             {
@@ -65,6 +69,8 @@ namespace Examination_WebApi.Services.AuthenticationService
             {
                 return new BadRequestResult();
             }
+
+            await _cartService.DeleteCart(user.Id);
 
             int adressId = user.AddressId;
 

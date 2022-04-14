@@ -30,7 +30,5 @@ namespace Examination_WebApi.Models.Entities
 
         public virtual CategoryEntity Category { get; set; } = null!;
         public virtual InventoryEntity Inventory { get; set;} = null!;
-
-
     }
 }
