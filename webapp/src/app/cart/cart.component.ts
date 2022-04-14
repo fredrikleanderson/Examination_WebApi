@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartItem } from 'src/entities/cart-item';
 import { User } from 'src/entities/user';
+import { DeleteCartItem } from 'src/models/delete-cart-item';
 import { CartService } from 'src/services/cart.service';
 import { UserService } from 'src/services/user.service';
 
@@ -25,4 +26,11 @@ export class CartComponent implements OnInit {
     }
   }
 
+  RemoveItem(cartItem:CartItem):void{
+    this.cartService.RemoveCartItem(this.user!.id!, new DeleteCartItem(cartItem.articleNumber!, cartItem.quantity!)).subscribe(response =>{
+      this.cartItems = this.cartItems?.filter(element =>{
+        return element.id != cartItem.id
+      })
+    })
+  }
 }

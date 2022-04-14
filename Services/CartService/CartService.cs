@@ -1,6 +1,7 @@
 ﻿using Examination_WebApi.Data;
 using Examination_WebApi.Models.Entities;
 using Examination_WebApi.Models.Orders;
+using Examination_WebApi.Models.Users;
 using Examination_WebApi.Services.InventoryService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -85,6 +86,20 @@ namespace Examination_WebApi.Services.CartService
             });
         }
 
+        public async Task DeleteAllCartItemsWithProduct(int productId)
+        {
+            IEnumerable<CartItemEntity>? cartItems = await _context.CartItems.Where(x => x.ProductId == productId).ToListAsync();
+
+            if (cartItems == null)
+            {
+                return;
+            }
+
+            _context.RemoveRange(cartItems);
+            await _context.SaveChangesAsync();
+            return;
+        }
+
         public async Task<ActionResult> DeleteCart(int userId)
         {
             CartEntity? cart = _context.Carts.FirstOrDefault(x => x.UserId == userId);
@@ -98,6 +113,21 @@ namespace Examination_WebApi.Services.CartService
             await _context.SaveChangesAsync();
 
             return new OkObjectResult("Cart removed");
+        }
+
+        public async Task DeleteCartItem(int userId, RemoveCartItem model)
+        {
+            CartItemEntity? cartItem = await _context.CartItems.Include(x => x.Cart).ThenInclude(x => x.User)
+                .FirstOrDefaultAsync(x => x.Cart.User.Id == userId && x.ProductId == model.ProductId);
+
+            if (cartItem == null)
+            {
+                return;
+            }
+
+            await _inventoryService.IncrementProductInventoryAsync(cartItem.ProductId, model.Quantity);
+            _context.Remove(cartItem);
+            await _context.SaveChangesAsync();
         }
 
         public async Task<ActionResult<IEnumerable<ReadCartItem>>> GetCart(int userId)

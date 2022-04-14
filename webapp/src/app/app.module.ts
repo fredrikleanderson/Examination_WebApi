@@ -20,7 +20,6 @@ import { UserPageComponent } from './user-page/user-page.component';
 import { UserModificationComponent } from './user-modification/user-modification.component';
 import { UserDeletionComponent } from './user-deletion/user-deletion.component';
 import { CartComponent } from './cart/cart.component';
-import { CartItemComponent } from './cart-item/cart-item.component';
 
 @NgModule({
   declarations: [
@@ -40,8 +39,7 @@ import { CartItemComponent } from './cart-item/cart-item.component';
     UserPageComponent,
     UserModificationComponent,
     UserDeletionComponent,
-    CartComponent,
-    CartItemComponent
+    CartComponent
   ],
   imports: [
     HttpClientModule,

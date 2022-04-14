@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { CartItem } from 'src/entities/cart-item';
 import { AddCartItem } from 'src/models/add-cart-item';
+import { DeleteCartItem } from 'src/models/delete-cart-item';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,9 @@ export class CartService {
 
   GetCart(id:number): Observable<CartItem[]>{
     return this.http.get<CartItem[]>(this.apiUrl + `/${id}`, this.httpOptions)
+  }
+
+  RemoveCartItem(id:number, item:DeleteCartItem):Observable<any>{
+    return this.http.put(this.apiUrl + `/${id}`, item, this.httpOptions)
   }
 }

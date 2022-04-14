@@ -1,5 +1,7 @@
 ﻿using Examination_WebApi.Models.Orders;
+using Examination_WebApi.Models.Users;
 using Examination_WebApi.Services.CartService;
+using Examination_WebApi.Services.InventoryService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +17,7 @@ namespace Examination_WebApi.Controllers
         public CartsController(ICartService cartService)
         {
             _cartService = cartService;
-        }
+         }
 
         [HttpPost]
         [Authorize(Roles = "Admin, User")]
@@ -25,9 +27,18 @@ namespace Examination_WebApi.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize(Roles = "Admin, User")]
         public async Task<ActionResult<IEnumerable<ReadCartItem>>> GetCart(int id)
         {
             return await _cartService.GetCart(id);
         }
+
+        [HttpPut("{id}")]
+        [Authorize(Roles = "Admin, User")]
+        public async Task DeleteCartItem(int id, RemoveCartItem model)
+        {
+            await _cartService.DeleteCartItem(id, model);
+        }
+
     }
 }

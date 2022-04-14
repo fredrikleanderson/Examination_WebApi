@@ -5,7 +5,8 @@ namespace Examination_WebApi.Services.InventoryService
 {
     public interface IInventoryService
     {
-        Task<ActionResult> DecrementProductInventoryAsync(int productId, int quantity);
+        Task DecrementProductInventoryAsync(int productId, int quantity);
+        Task IncrementProductInventoryAsync(int productId, int quantity);
         Task<InventoryEntity> CreateProductInventoryAsync(int quantity);
         Task DeleteProductInventoryAsync(int id);
     }

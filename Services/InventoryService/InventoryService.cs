@@ -40,21 +40,38 @@ namespace Examination_WebApi.Services.InventoryService
             await _context.SaveChangesAsync();
         }
 
-        public async Task<ActionResult> DecrementProductInventoryAsync(int productId, int quantity)
+        public async Task DecrementProductInventoryAsync(int productId, int quantity)
         {
             InventoryEntity? inventory = await _context.Inventories.Include(x => x.Product)
                 .FirstOrDefaultAsync(x => x.Product.Id == productId);
 
             if(inventory == null)
             {
-                return new BadRequestObjectResult("Inventory not found");
+                return;
             }
 
             inventory.Quantity -= quantity;
             _context.Entry(inventory).State = EntityState.Modified;
             await _context.SaveChangesAsync();
 
-            return new OkObjectResult("Inventory adjusted");
+            return;
+        }
+
+        public async Task IncrementProductInventoryAsync(int productId, int quantity)
+        {
+            InventoryEntity? inventory = await _context.Inventories.Include(x => x.Product)
+                .FirstOrDefaultAsync(x => x.Product.Id == productId);
+
+            if (inventory == null)
+            {
+                return;
+            }
+
+            inventory.Quantity += quantity;
+            _context.Entry(inventory).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Examination_WebApi.Data;
 using Examination_WebApi.Models.Entities;
 using Examination_WebApi.Models.Products;
+using Examination_WebApi.Services.CartService;
 using Examination_WebApi.Services.CategoryService;
 using Examination_WebApi.Services.InventoryService;
 using Microsoft.AspNetCore.Mvc;
@@ -12,12 +13,14 @@ namespace Examination_WebApi.ProductService.Services
     {
         private readonly ICategoryService _categoryService;
         private readonly IInventoryService _inventoryService;
+        private readonly ICartService _cartService;
         private readonly DataContext _context;
 
-        public ProductService(ICategoryService categoryService, IInventoryService inventoryService, DataContext context)
+        public ProductService(ICategoryService categoryService, IInventoryService inventoryService, ICartService cartService, DataContext context)
         {
             _categoryService = categoryService;
             _inventoryService = inventoryService;
+            _cartService = cartService;
             _context = context;
         }
 
@@ -128,6 +131,8 @@ namespace Examination_WebApi.ProductService.Services
             {
                 return new BadRequestResult();
             }
+
+            await _cartService.DeleteAllCartItemsWithProduct(product.Id);
 
             _context.Products.Remove(product);
             await _context.SaveChangesAsync();

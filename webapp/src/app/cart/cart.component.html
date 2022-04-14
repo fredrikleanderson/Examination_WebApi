@@ -9,12 +9,12 @@
         <tr>
             <th>Artikelnummer</th>
             <th>Servett</th>
-            <th>Antal</th>
+            <th> Antal</th>
         </tr>
         <tr *ngFor="let cartItem of cartItems">
             <td>{{cartItem.articleNumber}}</td>
             <td>{{cartItem.productName}}</td>
-            <td>{{cartItem.quantity}}</td>
+            <td>{{cartItem.quantity}} <button (click)="RemoveItem(cartItem)">X</button></td>
         </tr>
     </table>
 </div>

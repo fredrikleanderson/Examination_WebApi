@@ -27,6 +27,7 @@ export class ProductListItemComponent implements OnInit {
   ngOnInit(): void {
     this.cartItem.productId = this.product!.id
     if(localStorage.getItem("token")){
+      this.userService.refreshUser()
       this.user = this.userService.loggedInUser
       this.cartItem.userId = this.userService.loggedInUser?.id
     }
@@ -35,9 +36,9 @@ export class ProductListItemComponent implements OnInit {
   AddToCart():void {
     if(localStorage.getItem("token") && this.product.quantity > 0){
       this.cartService.AddToCart(this.cartItem).subscribe(response =>{
-        console.log(response)
         if(response.quantity){
-          this.product.quantity -= response.quantity
+          this.product.quantity -= this.cartItem.quantity!
+          this.cartItem = new AddCartItem()
         }
       })
     }
