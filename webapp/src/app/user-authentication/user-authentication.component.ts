@@ -31,8 +31,8 @@ export class UserAuthenticationComponent implements OnInit {
     })
     await new Promise(x => setTimeout(x, 1000))
     if(localStorage.getItem("token")){
-      this.getUser(this.model)
-      this.userService.refreshUser();
+      await this.userService.refreshUser();
+      this.user = this.userService.loggedInUser
     }
     this.model = new AuthenticateUser();
   }
@@ -46,21 +46,6 @@ export class UserAuthenticationComponent implements OnInit {
   getCurrentUser(){
     this.userService.currentUser().subscribe(response =>{
       this.user = response
-    })
-  }
-
-  getUser(user:User){
-    fetch(this.apiUrl, {
-      method: 'post',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('token')}`
-      },
-      body: JSON.stringify(user)
-    })
-    .then(response => response.json())
-    .then(data => {
-      this.user = data
     })
   }
 }

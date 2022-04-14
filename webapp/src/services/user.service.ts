@@ -47,9 +47,11 @@ export class UserService {
     return this.http.put<UpdateUser>(this.apiUrl + `${id}`, user, this.httpOptions)
   }
 
-  refreshUser(): void{
+  async refreshUser(): Promise<void>{
+    if(localStorage.getItem("token"))
     this.currentUser().subscribe(response =>{
       this.loggedInUser = response
     })
+    await new Promise(x => setTimeout(x, 1000))
   }
 }

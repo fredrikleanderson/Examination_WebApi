@@ -34,7 +34,7 @@ export class ProductListItemComponent implements OnInit {
   }
 
   AddToCart():void {
-    if(localStorage.getItem("token") && this.product.quantity > 0){
+    if(localStorage.getItem("token") && this.cartItem.quantity! > 0){
       this.cartService.AddToCart(this.cartItem).subscribe(response =>{
         if(response.quantity){
           this.product.quantity -= this.cartItem.quantity!
