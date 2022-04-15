@@ -30,5 +30,20 @@ namespace Examination_WebApi.Controllers
         {
             return await _orderService.UpdateOrder(model);
         }
+
+        [HttpPut("{id}")]
+        [Authorize(Roles = ("Admin"))]
+        public async Task ShipOrder(int id)
+        {
+            await _orderService.SetOrderStatusToShipped(id);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = ("Admin"))]
+        public async Task<ActionResult<IEnumerable<ReadOrder>>> GetOrders()
+        {
+            return await _orderService.ReadOrders();
+        }
+
     }
 }

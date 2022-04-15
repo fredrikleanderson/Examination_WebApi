@@ -15,11 +15,15 @@ ul{
 }
 
 table{
-    margin: 30px auto;
+    margin: 15px auto;
     border: 1px solid black;
 }
 
 th, td {
     border: 1px solid black;
     padding: 15px;
+}
+
+.grid-bottom{
+    display: none;
 }

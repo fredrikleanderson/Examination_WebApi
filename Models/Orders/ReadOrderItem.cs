@@ -4,7 +4,7 @@
     {
         public int Id { get; set; }
         public int ArticleNumber { get; set; }
-        public int ProductName { get; set; }
+        public string ProductName { get; set; } = null!;
         public int Quantity { get; set; }
     }
 }

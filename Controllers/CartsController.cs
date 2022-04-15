@@ -40,5 +40,12 @@ namespace Examination_WebApi.Controllers
             await _cartService.RemoveItemFromCart(id, model);
         }
 
+        [HttpDelete("{id}")]
+        [Authorize(Roles = "Admin, User")]
+        public async Task ClearCart(int id)
+        {
+            await _cartService.ClearCartAfterPurchase(id);
+        }
+
     }
 }

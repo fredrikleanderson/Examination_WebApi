@@ -45,7 +45,7 @@ namespace Examination_WebApi.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles ="Admin, User")]
+        //[Authorize(Roles ="Admin, User")]
         public async Task<ActionResult<ReadUser>> CurrentUser()
         {
             var identity = HttpContext.User.Identity as ClaimsIdentity;

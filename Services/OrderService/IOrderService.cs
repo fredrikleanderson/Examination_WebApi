@@ -7,5 +7,7 @@ namespace Examination_WebApi.Services.OrderService
     {
         Task<ActionResult<GetOrderId>> CreateOrder(PlaceOrder model);
         Task<ActionResult> UpdateOrder(CreateOrderItem model);
+        Task<ActionResult<IEnumerable<ReadOrder>>> ReadOrders();
+        Task SetOrderStatusToShipped(int orderId);
     }
 }

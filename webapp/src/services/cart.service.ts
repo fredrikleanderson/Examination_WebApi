@@ -31,4 +31,8 @@ export class CartService {
   RemoveCartItem(id:number, item:DeleteCartItem):Observable<any>{
     return this.http.put(this.apiUrl + `/${id}`, item, this.httpOptions)
   }
+
+  ClearCart(id:number): Observable<any>{
+    return this.http.delete(this.apiUrl + `/${id}`, this.httpOptions)
+  }
 }

@@ -40,16 +40,16 @@ export class CartComponent implements OnInit {
 
   PlaceOrder():void{
     if(this.user && this.cartItems?.length! > 0){
-      this.orderService.placeOrder(new PlaceOrder(this.user.id!, new Date(), "Received")).subscribe(response =>{
+      this.orderService.placeOrder(new PlaceOrder(this.user.id!, new Date(), "Mottagen")).subscribe(response =>{
+        let orderId = response.id
         this.cartItems?.forEach(element =>{
-          let orderItem = new CreateOrderItem(response.id!, element.id!, element.productName!, element.quantity!)
-          this.orderService.addToOrder(orderItem).subscribe(res => {
-            this.cartItems = this.cartItems?.filter(e =>{
-              return e.id != element.id
-            })
-          })
+          let orderItem = new CreateOrderItem(orderId!, element.id!, element.productName!, element.quantity!)
+          this.orderService.addToOrder(orderItem).subscribe()
         })
       })
+      this.cartService.ClearCart(this.user.id!).subscribe(res =>{
+      })
     }
+    this.ngOnInit()
   }
 }

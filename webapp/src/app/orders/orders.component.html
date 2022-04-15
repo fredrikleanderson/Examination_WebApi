@@ -1,6 +1,38 @@
 <div *ngIf="!user" ngClass="container">
     <h3>Du måste vara inloggad. Gå till inloggning.</h3>
 </div>
-<div *ngIf="user" ngClass="container">
-    <h3>Alla ordrar (Bara admins kan se)</h3>
+<div *ngIf="user?.role == 'User'" ngClass="container">
+    <h3>Du måste vara admin för att ha tillgång till denna sida.</h3>
+</div>
+<div *ngIf="user?.role == 'Admin'" ngClass="container">
+    <h3>Alla ordrar</h3>
+    <div ngClass="container" *ngFor="let order of orders">
+        <table>
+            <tr>
+                <th>Ordernummer</th>
+                <th>Beställare</th>
+                <th>Adress</th>
+                <th>Status</th>
+                <th>Hantera</th>
+            </tr>
+            <tr>
+                <td>{{order.id}}</td>
+                <td>{{order.firstName}} {{order.lastName}}</td>
+                <td>{{order.streetAddress}} {{order.postalCode}} {{order.city}}</td>
+                <td>{{order.orderStatus}}</td>
+                <td *ngIf="order.orderStatus == 'Mottagen'"><button (click)="Ship(order.id!)">Skicka</button></td>
+                <td *ngIf="order.orderStatus == 'Skickad'"><button>Arkivera</button></td>
+            </tr>
+            <tr>
+                <th>Artikelnummer</th>
+                <th>Produktnamn</th>
+                <th>Mängd</th>
+            </tr>
+            <tr *ngFor="let orderItems of order.orderItems">
+                <td>{{orderItems.articleNumber}}</td>
+                <td>{{orderItems.productName}}</td>
+                <td>{{orderItems.quantity}}</td>
+            </tr>
+        </table>
+    </div>
 </div>

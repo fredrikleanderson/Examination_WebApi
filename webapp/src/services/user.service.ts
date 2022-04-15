@@ -52,6 +52,5 @@ export class UserService {
     this.currentUser().subscribe(response =>{
       this.loggedInUser = response
     })
-    await new Promise(x => setTimeout(x, 1000))
   }
 }

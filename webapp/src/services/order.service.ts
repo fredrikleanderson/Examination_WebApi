@@ -27,4 +27,12 @@ export class OrderService {
   addToOrder(orderItem:CreateOrderItem): Observable<any>{
     return this.http.put(this.apiUrl, orderItem, this.httpOptions)
   }
+
+  getOrders(): Observable<Order[]>{
+    return this.http.get<Order[]>(this.apiUrl, this.httpOptions)
+  }
+
+  shipOrder(id:number): Observable<any>{
+    return this.http.put(this.apiUrl + `/${id}`, this.httpOptions)
+  }
 }

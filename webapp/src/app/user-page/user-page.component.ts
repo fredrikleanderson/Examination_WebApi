@@ -17,6 +17,7 @@ export class UserPageComponent implements OnInit {
 
   ngOnInit(): void {
     if(localStorage.getItem("token")){
+      this.userService.refreshUser();
       this.userService.currentUser().subscribe(response => {
         this.user = response
       })

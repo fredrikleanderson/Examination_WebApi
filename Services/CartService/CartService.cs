@@ -165,7 +165,12 @@ namespace Examination_WebApi.Services.CartService
                 return;
             }
 
-            IEnumerable<CartItemEntity>? cartItems = _context.CartItems.Where(x => x.CartId == cart.Id);
+            List<CartItemEntity>? cartItems = await _context.CartItems.Where(x => x.CartId == cart.Id).ToListAsync();
+
+            if (!cartItems.Any())
+            {
+                return;
+            }
 
             _context.CartItems.RemoveRange(cartItems);
             await _context.SaveChangesAsync();
