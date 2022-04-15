@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartItem } from 'src/entities/cart-item';
 import { User } from 'src/entities/user';
+import { CreateOrderItem } from 'src/models/create-order-item';
 import { DeleteCartItem } from 'src/models/delete-cart-item';
 import { PlaceOrder } from 'src/models/place-order';
 import { CartService } from 'src/services/cart.service';
@@ -39,8 +40,15 @@ export class CartComponent implements OnInit {
 
   PlaceOrder():void{
     if(this.user && this.cartItems?.length! > 0){
-      this.orderService.placeOrder(new PlaceOrder(this.user.id!, new Date(), "Order Received")).subscribe(response =>{
-        console.log(response)
+      this.orderService.placeOrder(new PlaceOrder(this.user.id!, new Date(), "Received")).subscribe(response =>{
+        this.cartItems?.forEach(element =>{
+          let orderItem = new CreateOrderItem(response.id!, element.id!, element.productName!, element.quantity!)
+          this.orderService.addToOrder(orderItem).subscribe(res => {
+            this.cartItems = this.cartItems?.filter(e =>{
+              return e.id != element.id
+            })
+          })
+        })
       })
     }
   }

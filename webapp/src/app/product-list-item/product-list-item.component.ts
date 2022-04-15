@@ -38,7 +38,7 @@ export class ProductListItemComponent implements OnInit {
       this.cartService.AddToCart(this.cartItem).subscribe(response =>{
         if(response.quantity){
           this.product.quantity -= this.cartItem.quantity!
-          this.cartItem = new AddCartItem()
+          this.cartItem.quantity = 0
         }
       })
     }

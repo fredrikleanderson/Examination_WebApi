@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Order } from 'src/entities/order';
+import { CreateOrderItem } from 'src/models/create-order-item';
 import { PlaceOrder } from 'src/models/place-order';
 
 @Injectable({
@@ -21,5 +22,9 @@ export class OrderService {
 
   placeOrder(order:PlaceOrder): Observable<Order>{
     return this.http.post<Order>(this.apiUrl, order, this.httpOptions)
+  }
+
+  addToOrder(orderItem:CreateOrderItem): Observable<any>{
+    return this.http.put(this.apiUrl, orderItem, this.httpOptions)
   }
 }

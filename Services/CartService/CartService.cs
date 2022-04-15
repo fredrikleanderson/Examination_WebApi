@@ -155,5 +155,22 @@ namespace Examination_WebApi.Services.CartService
 
             return result;
         }
+
+        public async Task ClearCartAfterPurchase(int userId)
+        {
+            CartEntity? cart = await _context.Carts.FirstOrDefaultAsync(x => x.UserId == userId);
+
+            if (cart == null)
+            {
+                return;
+            }
+
+            IEnumerable<CartItemEntity>? cartItems = _context.CartItems.Where(x => x.CartId == cart.Id);
+
+            _context.CartItems.RemoveRange(cartItems);
+            await _context.SaveChangesAsync();
+
+            return;
+        }
     }
 }

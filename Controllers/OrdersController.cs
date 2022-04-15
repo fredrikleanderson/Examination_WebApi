@@ -23,5 +23,12 @@ namespace Examination_WebApi.Controllers
         {
             return await _orderService.CreateOrder(model);
         }
+
+        [HttpPut]
+        [Authorize(Roles =("Admin,User"))]
+        public async Task<ActionResult> PutOrderItem(CreateOrderItem model)
+        {
+            return await _orderService.UpdateOrder(model);
+        }
     }
 }

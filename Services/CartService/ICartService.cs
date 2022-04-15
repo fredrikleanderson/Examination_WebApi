@@ -12,5 +12,6 @@ namespace Examination_WebApi.Services.CartService
         Task DeleteAllCartItemsWithDeletedProduct(int productId);
         Task<ActionResult<IEnumerable<ReadCartItem>>> GetCart(int userId);
         Task<ActionResult<ReadCartItem>> AddItemToCart(CreateCartItem model);
+        Task ClearCartAfterPurchase(int userId);
     }
 }

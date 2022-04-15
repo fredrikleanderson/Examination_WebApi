@@ -44,9 +44,11 @@ export class UserAuthenticationComponent implements OnInit {
   }
 
   getCurrentUser(){
-    this.userService.currentUser().subscribe(response =>{
-      this.user = response
-    })
+    if(localStorage.getItem("token")){
+      this.userService.currentUser().subscribe(response =>{
+        this.user = response
+      })
+    }
   }
 }
 
