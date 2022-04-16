@@ -30,7 +30,7 @@ export class UserAuthenticationComponent implements OnInit {
       localStorage.setItem('token', response)
     })
     await new Promise(x => setTimeout(x, 1000))
-    this.ngOnInit()
+    // this.ngOnInit()
   }
 
    LogOut():void{

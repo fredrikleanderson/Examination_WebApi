@@ -27,7 +27,17 @@ export class OrdersComponent implements OnInit {
   }
 
   Ship(id:number): void{
-    this.orderService.shipOrder(id).subscribe()
+    if(localStorage.getItem("token")){
+      this.orderService.shipOrder(id).subscribe(response =>{
+      })
+    }
+  }
+
+  File(id:number): void{
+    if(localStorage.getItem("token")){
+      this.orderService.fileOrder(id).subscribe(response =>{
+      })
+    }
   }
 
 }

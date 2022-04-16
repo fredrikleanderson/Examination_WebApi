@@ -21,7 +21,7 @@
                 <td>{{order.streetAddress}} {{order.postalCode}} {{order.city}}</td>
                 <td>{{order.orderStatus}}</td>
                 <td *ngIf="order.orderStatus == 'Mottagen'"><button (click)="Ship(order.id!)">Skicka</button></td>
-                <td *ngIf="order.orderStatus == 'Skickad'"><button>Arkivera</button></td>
+                <td *ngIf="order.orderStatus == 'Skickad'"><button (click)="File(order.id!)">Arkivera</button></td>
             </tr>
             <tr>
                 <th>Artikelnummer</th>

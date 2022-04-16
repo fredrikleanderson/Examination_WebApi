@@ -5,5 +5,6 @@
         public const string Cancelled = "Avbruten";
         public const string Received = "Mottagen";
         public const string Shipped = "Skickad";
+        public const string Filed = "Arkiverad";
     }
 }

@@ -107,5 +107,21 @@ namespace Examination_WebApi.Services.OrderService
 
             return;
         }
+
+        public async Task FileOrder(int orderId)
+        {
+            OrderEntity? order = await _context.Orders.FindAsync(orderId);
+
+            if (order == null)
+            {
+                return;
+            }
+
+            order.OrderStatus = OrderStatus.Filed;
+            _context.Entry(order).State = EntityState.Modified;
+            await _context.SaveChangesAsync();
+
+            return;
+        }
     }
 }

@@ -38,6 +38,13 @@ namespace Examination_WebApi.Controllers
             await _orderService.SetOrderStatusToShipped(id);
         }
 
+        [HttpDelete("{id}")]
+        [Authorize(Roles = ("Admin"))]
+        public async Task FileOrder(int id)
+        {
+            await _orderService.FileOrder(id);
+        }
+
         [HttpGet]
         [Authorize(Roles = ("Admin"))]
         public async Task<ActionResult<IEnumerable<ReadOrder>>> GetOrders()

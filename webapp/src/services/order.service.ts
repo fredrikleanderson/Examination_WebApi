@@ -33,6 +33,10 @@ export class OrderService {
   }
 
   shipOrder(id:number): Observable<any>{
-    return this.http.put(this.apiUrl + `/${id}`, this.httpOptions)
+    return this.http.put(this.apiUrl + `/${id}`, null, this.httpOptions)
+  }
+
+  fileOrder(id:number): Observable<any>{
+    return this.http.delete(this.apiUrl + `/${id}`, this.httpOptions)
   }
 }
