@@ -33,7 +33,6 @@ namespace Examination_WebApi.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles ="Admin, User")]
         public async Task<ActionResult<ReadUser>> CurrentUser(AuthenticateUser user)
         {
             if (user != null)
@@ -45,7 +44,6 @@ namespace Examination_WebApi.Controllers
         }
 
         [HttpGet]
-        //[Authorize(Roles ="Admin, User")]
         public async Task<ActionResult<ReadUser>> CurrentUser()
         {
             var identity = HttpContext.User.Identity as ClaimsIdentity;

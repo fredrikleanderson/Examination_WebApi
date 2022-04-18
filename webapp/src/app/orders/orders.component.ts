@@ -28,15 +28,13 @@ export class OrdersComponent implements OnInit {
 
   Ship(id:number): void{
     if(localStorage.getItem("token")){
-      this.orderService.shipOrder(id).subscribe(response =>{
-      })
+      this.orderService.shipOrder(id).subscribe(()=> this.ngOnInit())
     }
   }
 
   File(id:number): void{
     if(localStorage.getItem("token")){
-      this.orderService.fileOrder(id).subscribe(response =>{
-      })
+      this.orderService.fileOrder(id).subscribe(()=> this.ngOnInit())
     }
   }
 

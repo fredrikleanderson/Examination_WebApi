@@ -8,5 +8,6 @@ export interface Order {
     postalCode?:string,
     city?:string
     orderStatus?:string
+    date?:Date
     orderItems?:OrderItem[]
 }

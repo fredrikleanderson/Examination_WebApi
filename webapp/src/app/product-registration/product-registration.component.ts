@@ -20,6 +20,7 @@ export class ProductRegistrationComponent implements OnInit {
     if(localStorage.getItem("token")){
       this.productService.createProduct(this.model).subscribe(response =>{
         this.product = response;
+        this.model = new CreateProduct()
       })
     }
   }

@@ -23,7 +23,7 @@ namespace Examination_WebApi.Services.OrderService
             OrderEntity order = new OrderEntity
             {
                 UserId = model.UserId,
-                OrderRecieved = model.OrderRecieved,
+                OrderRecieved = DateTime.Now,
                 OrderStatus = model.OrderStatus,
             };
 
@@ -67,6 +67,7 @@ namespace Examination_WebApi.Services.OrderService
                     PostalCode = order.User.Address.PostalCode,
                     City = order.User.Address.City,
                     OrderStatus = order.OrderStatus,
+                    Date = order.OrderRecieved,
                     OrderItems = orderItems.ToArray()
                 });
             }

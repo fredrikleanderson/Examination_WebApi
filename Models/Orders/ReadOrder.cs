@@ -9,6 +9,7 @@
         public string PostalCode { get; set; } = null!;
         public string City { get; set; } = null!;
         public string OrderStatus { get; set; } = null!;
+        public DateTime Date { get; set; }
         public ReadOrderItem[] OrderItems { get; set; } = null!;
     }
 }

@@ -29,8 +29,6 @@ export class UserAuthenticationComponent implements OnInit {
     this.userService.login(this.model).subscribe(response => {
       localStorage.setItem('token', response)
     })
-    await new Promise(x => setTimeout(x, 1000))
-    // this.ngOnInit()
   }
 
    LogOut():void{
